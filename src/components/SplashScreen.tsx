@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import { animate, createTimeline, stagger } from "animejs";
 import Image from "next/image";
-import { after } from "node:test";
 
 interface SplashScreenProps {
     onComplete: () => void;
@@ -23,11 +22,11 @@ const TRASH_ITEMS = [
 
 function randomPos() {
     const positions = [
-        { x: "12%", y: "15%" },
-        { x: "75%", y: "12%" },
-        { x: "8%", y: "60%" },
-        { x: "80%", y: "58%" },
-        { x: "20%", y: "75%" },
+        { x: "35%", y: "30%" },
+        { x: "65%", y: "30%" },
+        { x: "30%", y: "55%" },
+        { x: "70%", y: "55%" },
+        { x: "50%", y: "15%" },
     ];
     return positions;
 }
@@ -38,6 +37,8 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
     const lidRef = useRef<HTMLImageElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
     const trashRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const onCompleteRef = useRef(onComplete);
+    onCompleteRef.current = onComplete;
     const positions = randomPos();
 
     useEffect(() => {
@@ -66,7 +67,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             {
                 opacity: [0, 1],
                 scale: [0, 1],
-                duration: 700,
+                duration: 800,
             },
             300,
         );
@@ -87,7 +88,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
         tl.add(
             lid,
             {
-                translateY: [0, -28],
+                translateY: [0, -54],
                 duration: 400,
                 ease: "outQuad",
             },
@@ -100,10 +101,8 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             tl.add(
                 el,
                 {
-                    opacity: [1, 0],
-                    scale: [1, 0.1],
-                    duration: 450,
-                    ease: "inQuad",
+                    duration: 600,
+                    ease: "inOutQuad",
                     onBegin() {
                         const binRect = bin.getBoundingClientRect();
                         const elRect = el.getBoundingClientRect();
@@ -115,13 +114,32 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                             binRect.top +
                             binRect.height / 2 -
                             (elRect.top + elRect.height / 2);
+                        const arcHeight = 60;
+                        const midX = dx * 0.5 + (i % 2 === 0 ? -20 : 20);
+
                         animate(el, {
-                            translateX: dx,
-                            translateY: dy,
-                            opacity: [1, 0],
-                            scale: [1, 0.1],
-                            duration: 450,
-                            ease: "inQuad",
+                            keyframes: [
+                                {
+                                    translateX: 0,
+                                    translateY: 0,
+                                    scale: 1,
+                                    opacity: 1,
+                                },
+                                {
+                                    translateX: midX,
+                                    translateY: dy - arcHeight,
+                                    scale: 0.6,
+                                    opacity: 1,
+                                },
+                                {
+                                    translateX: dx,
+                                    translateY: dy,
+                                    scale: 0.1,
+                                    opacity: 0,
+                                },
+                            ],
+                            duration: 600,
+                            ease: "inOutQuad",
                         });
                     },
                 },
@@ -133,50 +151,50 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
         tl.add(
             lid,
             {
-                translateY: [-28, 0],
-                duration: 350,
+                translateY: [-50, 0],
+                duration: 500,
                 ease: "outBounce",
             },
             2100 + trashEls.length * 160 + 100,
         );
 
-        // Bin shakes
+        // Bin shakes (bottle-shake: rotate around base)
         const afterShake = 2100 + trashEls.length * 160 + 100 + 350 + 100;
         tl.add(
             bin,
             {
-                translateX: [0, -8, 8, -6, 6, -4, 4, 0],
-                duration: 500,
+                rotate: [0, -12, 12, -9, 9, -5, 5, -2, 2, 0],
+                duration: 900,
                 ease: "linear",
             },
             afterShake,
         );
 
         // Green overlay wipes up to cover page
-        const afterShakeDone = afterShake + 500 + 200;
+        const afterShakeDone = afterShake + 700 + 200;
         tl.add(
-            overlay,
+            container,
             {
-                translateY: ["100%", "0%"],
-                duration: 600,
+                translateY: ["0%", "-100%"],
+                duration: 1200,
                 ease: "inOutQuart",
                 onComplete() {
-                    onComplete();
+                    onCompleteRef.current();
                 },
             },
             afterShakeDone,
         );
 
         return () => {
-            tl.cancel?.();
+            tl.pause();
         };
-    }, [onComplete]);
+    }, []);
 
     return (
         <div
             ref={containerRef}
             className="fixed inset-0 z-50 overflow-hidden"
-            style={{ backgroundColor: "#BAD197" }}
+            style={{ backgroundColor: "#65B354" }}
             aria-hidden="true"
         >
             {/* Trash items */}
@@ -211,20 +229,37 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                 className="absolute"
                 style={{
                     left: "50%",
-                    top: "54%",
-                    transform: "translate(-50%, -50%)",
+                    top: "50%",
+                    marginLeft: -90,
+                    marginTop: -165,
                     width: 180,
+                    height: 330,
+                    transformOrigin: "bottom center",
                 }}
             >
+                {/* Ground shadow */}
+                <div
+                    style={{
+                        position: "absolute",
+                        bottom: 6,
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        width: 150,
+                        height: 20,
+                        borderRadius: "50%",
+                        backgroundColor: "rgba(0, 0, 0, 0.2)",
+                        filter: "blur(6px)",
+                    }}
+                />
                 {/* Lid - separate image */}
                 <Image
                     ref={lidRef}
                     src="/images/splash/tutup-tong.svg"
                     alt="Trash Bin Lid"
                     width={180}
-                    height={60}
-                    className="relative z-10 w-full object-contain"
-                    style={{ display: "block" }}
+                    height={98}
+                    className="absolute left-0 w-full object-contain z-10"
+                    style={{ top: 56, marginLeft: 1 }}
                     draggable={false}
                 />
                 {/* Body */}
@@ -232,9 +267,9 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                     src="/images/splash/body-tong.svg"
                     alt="Trash Bin Body"
                     width={180}
-                    height={160}
-                    className="relative z-0 w-full object-contain"
-                    style={{ display: "block", marginTop: -4 }}
+                    height={251}
+                    className="absolute left-0 w-full object-contain z-0"
+                    style={{ bottom: 0 }}
                     draggable={false}
                 />
             </div>
@@ -242,7 +277,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             <div
                 ref={overlayRef}
                 className="absolute inset-0 z-40"
-                style={{ backgroundColor: "#BAD197" }}
+                style={{ backgroundColor: "#65B354" }}
             />
         </div>
     );
