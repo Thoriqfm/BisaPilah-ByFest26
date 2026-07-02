@@ -8,9 +8,9 @@ export default function Home() {
 
     return (
         <>
-            {!splashDone && (
-                <SplashScreen onComplete={() => setSplashDone(true)} />
-            )}
+            {/* {!splashDone && ( */}
+            <SplashScreen onComplete={() => setSplashDone(true)} />
+            {/* )} */}
 
             <main className="flex min-h-screen items-center justify-center">
                 <p className="text-xl text-gray-600">
