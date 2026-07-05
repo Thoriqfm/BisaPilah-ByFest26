@@ -3,7 +3,7 @@
 import { useState } from "react";
 import SplashScreen from "../components/ui/SplashScreen";
 import HeroSection from "../components/sections/HeroSection";
-
+import GameSection from "../components/sections/GameSection";
 export default function Home() {
     const [splashDone, setSplashDone] = useState(false);
 
@@ -13,17 +13,9 @@ export default function Home() {
             <SplashScreen onComplete={() => setSplashDone(true)} />
             {/* )} */}
 
-            <main>
+            <main className="overflow-x-hidden">
                 <HeroSection />
-                {/* Game section — nanti */}
-                <section
-                    id="game-section"
-                    className="min-h-screen bg-white flex items-center justify-center"
-                >
-                    <p className="text-gray-400 text-xl">
-                        Game section coming soon...
-                    </p>
-                </section>
+                <GameSection />
             </main>
         </>
     );
