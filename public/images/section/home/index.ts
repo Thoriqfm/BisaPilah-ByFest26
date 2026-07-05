@@ -8,3 +8,4 @@ export const kincir2 = "/images/section/home/kincir-2.svg";
 export const pohonKiri = "/images/section/home/pohon-hero-kiri.svg";
 export const pohonKanan = "/images/section/home/pohon-hero-kanan.svg";
 export const heroBg = "/images/section/home/hero-utama.svg";
+export const trashIcon = "/images/section/home/icon-sampah.svg"
