@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import SplashScreen from "../components/Splash/SplashScreen";
-import HeroSection from "../components/Hero/HeroSection";
+import SplashScreen from "../components/ui/SplashScreen";
+import HeroSection from "../components/sections/HeroSection";
 
 export default function Home() {
     const [splashDone, setSplashDone] = useState(false);
