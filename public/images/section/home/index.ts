@@ -1,0 +1,10 @@
+export const bisapilahImg = "/images/section/home/BisaPilah.png";
+export const awanKiriAtas = "/images/section/home/awan-kiriatas.svg";
+export const awanKananAtas = "/images/section/home/awan-kananatas.svg";
+export const awanKiriBawah = "/images/section/home/awan-kiribawah.svg";
+export const awanKananBawah = "/images/section/home/awan-kananbawah.svg";
+export const kincir1 = "/images/section/home/kincir-1.svg";
+export const kincir2 = "/images/section/home/kincir-2.svg";
+export const pohonKiri = "/images/section/home/pohon-hero-kiri.svg";
+export const pohonKanan = "/images/section/home/pohon-hero-kanan.svg";
+export const heroBg = "/images/section/home/hero-utama.svg";
