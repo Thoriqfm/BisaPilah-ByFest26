@@ -6,6 +6,7 @@ import {
     awanKananAtas,
     awanKiriBawah,
     awanKananBawah,
+    trashIcon,
 } from "../../../public/images/section/home";
 
 export default function HeroSection() {
@@ -97,8 +98,13 @@ export default function HeroSection() {
 
                 <button
                     onClick={handleScrollToGame}
-                    className="mt-6 flex items-center gap-3 bg-[#1a5c2a] text-white font-semibold px-8 py-3 rounded-full border-2 border-[#1a5c2a] hover:bg-white hover:text-[#1a5c2a] transition-all duration-300 cursor-pointer"
+                    className="mt-6 flex items-center gap-3 bg-[#1a5c2a] text-[#DDF8E9] font-semibold px-8 py-3 rounded-full border-2 border-[#1a5c2a] shadow-md hover:bg-[#247438] hover:-translate-y-1 hover:shadow-xl transition-all duration-300 cursor-pointer"
                 >
+                    <img
+                        src={trashIcon}
+                        alt=""
+                        className="w-5 h-5 object-contain"
+                    />
                     Mulai Tantangan
                 </button>
             </div>
