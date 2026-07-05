@@ -3,6 +3,8 @@
 import { useState } from "react";
 import SplashScreen from "../components/ui/SplashScreen";
 import HeroSection from "../components/sections/HeroSection";
+import GameSection from "../components/sections/GameSection";
+import ChoiceSection from "../components/sections/ChoiceSection";
 
 export default function Home() {
     const [splashDone, setSplashDone] = useState(false);
@@ -15,14 +17,12 @@ export default function Home() {
 
             <main>
                 <HeroSection />
-                {/* Game section — nanti */}
-                <section
-                    id="game-section"
-                    className="min-h-screen bg-white flex items-center justify-center"
-                >
-                    <p className="text-gray-400 text-xl">
-                        Game section coming soon...
-                    </p>
+                <GameSection />
+                <ChoiceSection />
+                
+                {/* Spacer section for testing scrolling */}
+                <section className="h-screen bg-[#071120] flex items-center justify-center">
+                    <p className="text-white/30 text-xl">Empty space for scrolling</p>
                 </section>
             </main>
         </>
