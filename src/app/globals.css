@@ -27,7 +27,7 @@ body {
 
 @font-face {
     font-family: "Moon Get";
-    src: url("/fonts/MoonGet.otf") format("opentype");
+    src: url("/fonts/moon-get-heavy.otf") format("opentype");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
