@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGameLogic } from "../../hooks/useGameLogic";
 import { useDrag } from "../../hooks/useDrag";
 import TrashBin from "../ui/TrashBin";
@@ -8,7 +8,11 @@ import TrashItem from "../ui/TrashItem";
 import { WasteCategory } from "../../data/wasteTypes";
 import { isColliding } from "../../lib/gameUtils";
 
-export default function GameSection() {
+interface GameSectionProps {
+    onFinish?: (finished: boolean) => void;
+}
+
+export default function GameSection({ onFinish }: GameSectionProps) {
     const {
         score,
         currentItem,
@@ -18,7 +22,14 @@ export default function GameSection() {
         setBinHoverState,
         isFinished,
         resetGame,
+        advanceToNextItem,
     } = useGameLogic();
+
+    useEffect(() => {
+        if (onFinish) {
+            onFinish(isFinished);
+        }
+    }, [isFinished, onFinish]);
 
     const [shakingBin, setShakingBin] = useState<{
         category: WasteCategory;
@@ -73,7 +84,9 @@ export default function GameSection() {
 
             if (isSuccess) {
                 setShakingBin({ category: targetCategory, type: "success" });
-                dropIntoBin(targetBin);
+                dropIntoBin(targetBin, () => {
+                    advanceToNextItem();
+                });
             } else {
                 setShakingBin({ category: targetCategory, type: "error" });
                 resetPosition(true);

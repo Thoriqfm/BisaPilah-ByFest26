@@ -63,11 +63,31 @@ export default function ChoiceSection() {
       <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-10 top-[5%] md:top-[8%]">
         {/* Left Man */}
         <div className="absolute -translate-x-[35%] md:-translate-x-[60%] opacity-[0.2] brightness-[0.7] mix-blend-screen w-[220px] md:w-[700px]">
-          <img src={manImg} alt="Man Left" className="w-full h-auto" />
+          <img
+            src={manImg}
+            alt="Man Left"
+            className="w-full h-auto"
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
+              maskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
+            }}
+          />
         </div>
         {/* Right Man */}
         <div className="absolute translate-x-[35%] md:translate-x-[60%] opacity-[0.2] brightness-[0.7] mix-blend-screen w-[220px] md:w-[700px]">
-          <img src={manImg} alt="Man Right" className="w-full h-auto" />
+          <img
+            src={manImg}
+            alt="Man Right"
+            className="w-full h-auto"
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
+              maskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
+            }}
+          />
         </div>
       </div>
 
@@ -78,11 +98,17 @@ export default function ChoiceSection() {
           src={manImg}
           alt="Man Center"
           className="w-full h-auto drop-shadow-2xl"
+          style={{
+            WebkitMaskImage:
+              "linear-gradient(to bottom, black 70%, transparent 100%)",
+            maskImage:
+              "linear-gradient(to bottom, black 70%, transparent 100%)",
+          }}
         />
       </div>
 
       {/* Texts: Aksi & Fact (Positioned at neck level of side men, above hands) */}
-      <div className="absolute top-[40%] md:top-[45%] w-full flex justify-between px-[4%] md:px-[10%] lg:px-[15%] z-10 pointer-events-none">
+      <div className="absolute top-[40%] md:top-[45%] w-full flex justify-between px-[4%] md:px-[10%] lg:px-[14%] z-10 pointer-events-none">
         <h3
           className="text-5xl md:text-[6.5rem] font-black text-[#00A3FF] drop-shadow-[0_0_15px_rgba(0,163,255,0.4)]"
           style={{ fontFamily: "'Arial Black', Impact, sans-serif" }}
@@ -93,7 +119,7 @@ export default function ChoiceSection() {
           className="text-5xl md:text-[6.5rem] font-black text-[#FF3333] drop-shadow-[0_0_15px_rgba(255,51,51,0.4)]"
           style={{ fontFamily: "'Arial Black', Impact, sans-serif" }}
         >
-          Fact
+          Fakta
         </h3>
       </div>
 
