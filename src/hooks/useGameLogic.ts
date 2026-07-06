@@ -12,6 +12,7 @@ interface UseGameLogicReturn {
     resetGame: () => void;
     setBinHoverState: (category: WasteCategory, isHovered: boolean) => void;
     isFinished: boolean;
+    advanceToNextItem: () => void;
 }
 
 export function useGameLogic(): UseGameLogicReturn {
@@ -62,8 +63,8 @@ export function useGameLogic(): UseGameLogicReturn {
         // Correct drop
         if (itemCategory === targetCategory) {
             setScore((prev) => prev + 1);
-            setCurrentIndex((prev) => prev + 1);
-            setMistakes(0); // Optional: reset mistakes on correct answer? The rule just says after 3 wrong. Let's keep mistakes or reset. The prompt doesn't specify resetting, we'll keep it cumulative or reset per item. Resetting per item makes more sense.
+            // We DO NOT increment index here. It will be incremented by advanceToNextItem after animation completes.
+            setMistakes(0); // Reset mistakes on correct answer
             setBinStates({
                 ORGANIK: 'default',
                 ANORGANIK: 'default',
@@ -94,6 +95,10 @@ export function useGameLogic(): UseGameLogicReturn {
         }
     }, [currentItem]);
 
+    const advanceToNextItem = useCallback(() => {
+        setCurrentIndex((prev) => prev + 1);
+    }, []);
+
     return {
         score,
         mistakes,
@@ -104,5 +109,6 @@ export function useGameLogic(): UseGameLogicReturn {
         resetGame,
         setBinHoverState,
         isFinished,
+        advanceToNextItem,
     };
 }
