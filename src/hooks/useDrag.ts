@@ -139,7 +139,7 @@ export function useDrag({ onDrop, onDragMove, enabled = true }: UseDragProps) {
             opacity: 0,
             duration: 300,
             ease: 'inQuad',
-            complete: () => {
+            onComplete: () => {
                 resetPosition(false); // Reset silently after drop animation
                 utils.set(element, { scale: 1, opacity: 1 }); // reset for next item
                 if (onComplete) onComplete();

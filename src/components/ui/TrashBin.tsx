@@ -27,7 +27,7 @@ export default function TrashBin({ category, state, shakeError, shakeSuccess, on
                     { value: 0, duration: 50 }
                 ],
                 ease: 'inOutSine',
-                complete: () => {
+                onComplete: () => {
                     if (onAnimationEnd) onAnimationEnd();
                 }
             });
@@ -42,7 +42,7 @@ export default function TrashBin({ category, state, shakeError, shakeSuccess, on
                     { value: 0, duration: 100 }
                 ],
                 ease: 'inOutSine',
-                complete: () => {
+                onComplete: () => {
                     if (onAnimationEnd) onAnimationEnd();
                 }
             });
