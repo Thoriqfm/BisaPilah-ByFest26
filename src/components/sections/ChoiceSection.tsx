@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { useRouter } from "next/navigation";
+
 import { animate } from "animejs";
 
 import {
@@ -10,8 +10,12 @@ import {
   tanganMerahKanan,
 } from "../../../public/images/section/choice";
 
-export default function ChoiceSection() {
-  const router = useRouter();
+interface ChoiceSectionProps {
+  onPillSelect?: (pill: 'aksi' | 'fact') => void;
+}
+
+export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
+
   const leftHandRef = useRef<HTMLImageElement>(null);
   const rightHandRef = useRef<HTMLImageElement>(null);
 
@@ -132,7 +136,7 @@ export default function ChoiceSection() {
           className="absolute bottom-42 left-[2%] md:left-[15%] lg:left-[20%] w-[180px] md:w-[320px] lg:w-[460px] origin-bottom-left pointer-events-auto cursor-pointer drop-shadow-2xl hover:brightness-110 transition-[filter]"
           onMouseEnter={() => handleHoverEnter(leftHandRef)}
           onMouseLeave={() => handleHoverLeave(leftHandRef)}
-          onClick={() => router.push("/aksi")}
+          onClick={() => onPillSelect && onPillSelect("aksi")}
         />
 
         <img
@@ -142,7 +146,7 @@ export default function ChoiceSection() {
           className="absolute bottom-42 right-[2%] md:right-[15%] lg:right-[20%] w-[180px] md:w-[320px] lg:w-[460px] origin-bottom-right pointer-events-auto cursor-pointer drop-shadow-2xl hover:brightness-110 transition-[filter]"
           onMouseEnter={() => handleHoverEnter(rightHandRef)}
           onMouseLeave={() => handleHoverLeave(rightHandRef)}
-          onClick={() => router.push("/fact")}
+          onClick={() => onPillSelect && onPillSelect("fact")}
         />
       </div>
     </section>
