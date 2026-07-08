@@ -1,5 +1,8 @@
 "use client";
 
+import { useRef, useEffect } from "react";
+import { animate, createTimeline } from "animejs";
+
 import {
     heroBg,
     awanKiriAtas,
@@ -9,12 +12,59 @@ import {
     trashIcon,
 } from "../../../public/images/section/home";
 
-export default function HeroSection() {
+export default function HeroSection({
+    isSplashDone = true,
+}: {
+    isSplashDone?: boolean;
+}) {
     const handleScrollToGame = () => {
         document
             .getElementById("game-section")
             ?.scrollIntoView({ behavior: "smooth" });
     };
+
+    const animated = useRef(false);
+
+    useEffect(() => {
+        if (isSplashDone && !animated.current) {
+            animated.current = true;
+
+            const tl = createTimeline({
+                defaults: {
+                    ease: "outQuart",
+                    duration: 2000,
+                },
+                onComplete: () => {
+                    // Continuous wiggle out of sync
+                    animate([".awan-kiri", ".awan-kanan"], {
+                        // Start from current position (0) smoothly to either 15px or -15px
+                        translateY: () => (Math.random() > 0.5 ? "15px" : "-15px"),
+                        alternate: true,
+                        loop: true,
+                        duration: () => 3000 + Math.random() * 2000, // Random duration between 3s and 5s
+                        delay: () => Math.random() * 1500, // Random delay so they don't start at the same time
+                        ease: "inOutSine",
+                    });
+                },
+            });
+
+            tl.add(
+                ".awan-kiri",
+                {
+                    translateX: ["-50vw", 0],
+                    opacity: [0, 1],
+                },
+                100, // slight delay after splash screen
+            ).add(
+                ".awan-kanan",
+                {
+                    translateX: ["50vw", 0],
+                    opacity: [0, 1],
+                },
+                100,
+            );
+        }
+    }, [isSplashDone]);
 
     return (
         <section className="relative min-h-screen overflow-hidden bg-[#F3FBFF]">
@@ -29,7 +79,7 @@ export default function HeroSection() {
             <img
                 src={awanKiriAtas}
                 alt=""
-                className="absolute z-1 pointer-events-none"
+                className="absolute z-1 pointer-events-none awan-kiri opacity-0"
                 style={{
                     top: "8%",
                     left: "-4.5%",
@@ -39,7 +89,7 @@ export default function HeroSection() {
             <img
                 src={awanKananAtas}
                 alt=""
-                className="absolute z-1 pointer-events-none"
+                className="absolute z-1 pointer-events-none awan-kanan opacity-0"
                 style={{
                     top: "3%",
                     right: "-18%",
@@ -49,7 +99,7 @@ export default function HeroSection() {
             <img
                 src={awanKiriBawah}
                 alt=""
-                className="absolute z-1 pointer-events-none"
+                className="absolute z-1 pointer-events-none awan-kiri opacity-0"
                 style={{
                     top: "67.5%",
                     left: "13%",
@@ -59,7 +109,7 @@ export default function HeroSection() {
             <img
                 src={awanKananBawah}
                 alt=""
-                className="absolute z-1 pointer-events-none"
+                className="absolute z-1 pointer-events-none awan-kanan opacity-0"
                 style={{
                     top: "61%",
                     right: "5%",

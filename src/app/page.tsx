@@ -39,7 +39,7 @@ export default function Home() {
             {/* )} */}
 
             <main className="overflow-x-hidden">
-                <HeroSection />
+                <HeroSection isSplashDone={splashDone} />
                 <GameSection onFinish={(status) => setIsGameFinished(status)} />
 
                 {hasGameFinishedOnce && (
