@@ -63,16 +63,16 @@ export default function FactSection({ onBack }: { onBack?: () => void }) {
                 <div className="flex items-center justify-center gap-4 md:gap-6 mb-4 flex-wrap">
                     <h2 
                         className="text-5xl md:text-[6.5rem] font-black text-[#F03724]"
-                        style={{ fontFamily: "'Arial Black', Impact, sans-serif" }}
+                        style={{ fontFamily: '"Moon Get", sans-serif' }}
                     >
                         Pil Merah
                     </h2>
                     <Image src={pilMerahIcon} alt="Pil Merah" className="w-16 md:w-28 h-auto drop-shadow-[0_0_15px_rgba(240,55,36,0.4)]" />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[#F03724]" style={{ fontFamily: "'Afacad', sans-serif" }}>
+                <h3 className="text-3xl md:text-4xl font-bold mb-4 text-[#F03724]" style={{ fontFamily: "'Afacad', sans-serif" }}>
                     Selamat Datang di Dunia Nyata
                 </h3>
-                <p className="text-sm md:text-base text-gray-300 max-w-2xl" style={{ fontFamily: "'Afacad', sans-serif" }}>
+                <p className="text-base md:text-lg text-gray-300 max-w-2xl" style={{ fontFamily: "'Afacad', sans-serif" }}>
                     Ini adalah kenyataan pahit tentang krisis literasi sampah di Indonesia.
                 </p>
             </div>
@@ -84,13 +84,13 @@ export default function FactSection({ onBack }: { onBack?: () => void }) {
                         <div className="h-48 flex items-center justify-center mb-6 w-full">
                             <Image src={card.imageSrc} alt={card.title} className="max-h-full w-auto object-contain" />
                         </div>
-                        <h4 className="text-[#F03724] text-xl font-bold mb-3" style={{ fontFamily: "'Afacad', sans-serif" }}>{card.title.split("(")[0].replace(/"/g, "")}</h4>
-                        <p className="text-sm text-gray-300 flex-grow mb-8" style={{ fontFamily: "'Afacad', sans-serif", lineHeight: "1.6" }}>
+                        <h4 className="text-[#F03724] text-2xl font-bold mb-3" style={{ fontFamily: "'Afacad', sans-serif" }}>{card.title.split("(")[0].replace(/"/g, "")}</h4>
+                        <p className="text-base text-gray-200 flex-grow mb-8" style={{ fontFamily: "'Afacad', sans-serif", lineHeight: "1.6" }}>
                             {card.shortDesc}
                         </p>
                         <button 
                             onClick={() => setSelectedCard(index)}
-                            className="text-gray-400 hover:text-[#F03724] transition-colors text-sm font-semibold flex items-center gap-2 mt-auto"
+                            className="text-gray-350 hover:text-[#F03724] transition-colors text-base font-semibold flex items-center gap-2 mt-auto"
                         >
                             Lihat Selengkapnya <span>→</span>
                         </button>

@@ -46,18 +46,13 @@ export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
       className="relative w-full h-screen bg-[#071120] flex flex-col items-center justify-center overflow-hidden select-none"
     >
       {/* Title (Behind the center man) */}
-      <div className="absolute top-[8%] md:top-[0%] w-full flex justify-center items-center z-0 gap-4 md:gap-8">
+      <div className="absolute top-[8%] md:top-[0%] w-full flex justify-center items-center z-0">
         <h2
-          className="text-[4rem] md:text-[8rem] lg:text-[11rem] font-black text-[#00A3FF] tracking-tighter drop-shadow-lg"
-          style={{ fontFamily: "'Arial Black', Impact, sans-serif" }}
+          className="text-[4rem] md:text-[8rem] lg:text-[11rem] font-black tracking-wide drop-shadow-lg text-center"
+          style={{ fontFamily: '"Moon Get", sans-serif' }}
         >
-          Pilih
-        </h2>
-        <h2
-          className="text-[4rem] md:text-[8rem] lg:text-[11rem] font-black text-[#FF3333] tracking-tighter drop-shadow-lg"
-          style={{ fontFamily: "'Arial Black', Impact, sans-serif" }}
-        >
-          Jalanmu
+          <span className="text-[#00A3FF]">Pilih</span>{" "}
+          <span className="text-[#FF3333]">Jalanmu</span>
         </h2>
       </div>
 
@@ -111,16 +106,16 @@ export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
       </div>
 
       {/* Texts: Aksi & Fact (Positioned at neck level of side men, above hands) */}
-      <div className="absolute top-[40%] md:top-[45%] w-full flex justify-between px-[4%] md:px-[10%] lg:px-[14%] z-10 pointer-events-none">
+      <div className="absolute top-[40%] md:top-[45%] w-full max-w-[500px] md:max-w-[1050px] lg:max-w-[1300px] left-1/2 -translate-x-1/2 flex justify-between px-6 md:px-12 z-10 pointer-events-none">
         <h3
-          className="text-5xl md:text-[6.5rem] font-black text-[#00A3FF] drop-shadow-[0_0_15px_rgba(0,163,255,0.4)]"
-          style={{ fontFamily: "'Arial Black', Impact, sans-serif" }}
+          className="text-5xl md:text-[6.5rem] font-black text-[#00A3FF] tracking-wide drop-shadow-[0_0_15px_rgba(0,163,255,0.4)]"
+          style={{ fontFamily: '"Moon Get", sans-serif' }}
         >
           Aksi
         </h3>
         <h3
-          className="text-5xl md:text-[6.5rem] font-black text-[#FF3333] drop-shadow-[0_0_15px_rgba(255,51,51,0.4)]"
-          style={{ fontFamily: "'Arial Black', Impact, sans-serif" }}
+          className="text-5xl md:text-[6.5rem] font-black text-[#FF3333] tracking-wide drop-shadow-[0_0_15px_rgba(255,51,51,0.4)] translate-x-6 md:translate-x-12"
+          style={{ fontFamily: '"Moon Get", sans-serif' }}
         >
           Fakta
         </h3>
