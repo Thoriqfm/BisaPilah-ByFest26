@@ -63,16 +63,16 @@ export default function AksiSection({ onBack }: { onBack?: () => void }) {
                 <div className="flex items-center justify-center gap-4 md:gap-6 mb-4 flex-wrap">
                     <h2 
                         className="text-5xl md:text-[6.5rem] font-black text-[#00A3FF]"
-                        style={{ fontFamily: "'Arial Black', Impact, sans-serif" }}
+                        style={{ fontFamily: '"Moon Get", sans-serif' }}
                     >
                         Pil Biru
                     </h2>
                     <Image src={pilBiruIcon} alt="Pil Biru" className="w-16 md:w-28 h-auto drop-shadow-[0_0_15px_rgba(0,163,255,0.4)]" />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[#00A3FF]" style={{ fontFamily: "'Afacad', sans-serif" }}>
+                <h3 className="text-3xl md:text-4xl font-bold mb-4 text-[#00A3FF]" style={{ fontFamily: "'Afacad', sans-serif" }}>
                     Ambil Kendali Mulai Hari Ini
                 </h3>
-                <p className="text-sm md:text-base text-gray-300 max-w-2xl" style={{ fontFamily: "'Afacad', sans-serif" }}>
+                <p className="text-base md:text-lg text-gray-300 max-w-2xl" style={{ fontFamily: "'Afacad', sans-serif" }}>
                     Anda tidak perlu mengubah dunia dalam semalam. Cukup lakukan hal kecil di dalam rumah dengan langkah ini
                 </p>
             </div>
@@ -84,13 +84,13 @@ export default function AksiSection({ onBack }: { onBack?: () => void }) {
                         <div className="h-48 flex items-center justify-center mb-6 w-full">
                             <Image src={card.imageSrc} alt={card.title} className="max-h-full w-auto object-contain" />
                         </div>
-                        <h4 className="text-[#00A3FF] text-xl font-bold mb-3" style={{ fontFamily: "'Afacad', sans-serif" }}>{card.title.split(":")[1]?.trim() || card.title}</h4>
-                        <p className="text-sm text-gray-300 flex-grow mb-8" style={{ fontFamily: "'Afacad', sans-serif", lineHeight: "1.6" }}>
+                        <h4 className="text-[#00A3FF] text-2xl font-bold mb-3" style={{ fontFamily: "'Afacad', sans-serif" }}>{card.title.split(":")[1]?.trim() || card.title}</h4>
+                        <p className="text-base text-gray-200 flex-grow mb-8" style={{ fontFamily: "'Afacad', sans-serif", lineHeight: "1.6" }}>
                             {card.shortDesc}
                         </p>
                         <button 
                             onClick={() => setSelectedCard(index)}
-                            className="text-gray-400 hover:text-[#00A3FF] transition-colors text-sm font-semibold flex items-center gap-2 mt-auto"
+                            className="text-gray-350 hover:text-[#00A3FF] transition-colors text-base font-semibold flex items-center gap-2 mt-auto"
                         >
                             Lihat Selengkapnya <span>→</span>
                         </button>
