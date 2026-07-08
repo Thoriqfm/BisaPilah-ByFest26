@@ -114,13 +114,13 @@ export default function GameSection({ onFinish }: GameSectionProps) {
             {/* Header / Title */}
             <div className="text-center z-10 px-4 mb-8 sm:mb-12">
                 <h2
-                    className="text-4xl sm:text-5xl font-black text-[#1F542A] mb-4 drop-shadow-sm"
-                    style={{ fontFamily: "'MOON GET', sans-serif" }}
+                    className="text-[64px] font-extrabold text-[#044800] mb-4 drop-shadow-sm leading-normal"
+                    style={{ fontFamily: '"MOON GET!", sans-serif' }}
                 >
                     Coba Pilahlah Sampah Ini!
                 </h2>
                 <p
-                    className="text-sm sm:text-base font-bold text-[#1F542A] mb-4 text-[32px]"
+                    className="text-[32px] font-bold text-[#044800] mb-4 leading-normal text-center"
                     style={{ fontFamily: "'Afacad', sans-serif" }}
                 >
                     Masukkan sampah ini sesuai dengan jenisnya! Seret ke tempat
@@ -135,9 +135,9 @@ export default function GameSection({ onFinish }: GameSectionProps) {
             </div>
 
             {/* Game Area */}
-            <div className="relative w-full max-w-4xl flex-grow flex flex-col items-center justify-between z-10">
+            <div className="relative w-full max-w-4xl grow flex flex-col items-center justify-between z-10">
                 {/* Active Trash Item */}
-                <div className="flex-grow flex items-center justify-center mt-10">
+                <div className="grow flex items-center justify-center mt-10 translate-y-[-20%]">
                     {currentItem && !isFinished ? (
                         <TrashItem ref={itemRef} item={currentItem} />
                     ) : isFinished ? (
@@ -159,7 +159,7 @@ export default function GameSection({ onFinish }: GameSectionProps) {
                 </div>
 
                 {/* Trash Bins Container */}
-                <div className="w-full flex justify-center gap-4 sm:gap-12 px-4 mb-32 sm:mb-40">
+                <div className="w-full flex justify-center items-end gap-6 sm:gap-12 md:gap-16 lg:gap-24 px-4 mb-32 sm:mb-40">
                     {(["ORGANIK", "ANORGANIK", "B3"] as WasteCategory[]).map(
                         (cat) => (
                             <TrashBin
@@ -181,36 +181,33 @@ export default function GameSection({ onFinish }: GameSectionProps) {
                 </div>
             </div>
 
-            {/* Background & Footer Graphics */}
-            <div className="absolute bottom-0 left-0 w-full z-0 pointer-events-none">
-                {/* Stones decoration */}
-                <div className="absolute bottom-16 sm:bottom-20 left-[10%] opacity-80">
+            {/* Floating Stones */}
+            <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
+                {/* batu-1 (Lingkaran Merah) */}
+                <div className="absolute top-[45%] sm:top-[50%] left-[25%] sm:left-[30%]">
                     <img
                         src="/images/section/games/pic/batu-1.svg"
                         alt="batu"
-                        className="w-8 sm:w-12 h-auto"
+                        className="w-16 sm:w-24 h-auto"
                     />
                 </div>
-                <div className="absolute bottom-24 sm:bottom-32 left-[25%] opacity-60">
+                {/* batu-2 (Lingkaran Biru) */}
+                <div className="absolute top-[38%] sm:top-[43%] right-[20%] sm:right-[30%]">
                     <img
                         src="/images/section/games/pic/batu-2.svg"
                         alt="batu"
-                        className="w-5 sm:w-8 h-auto"
+                        className="w-12 sm:w-26 h-auto"
                     />
                 </div>
-                <div className="absolute bottom-12 sm:bottom-16 right-[15%] opacity-90">
-                    <img
-                        src="/images/section/games/pic/batu-1.svg"
-                        alt="batu"
-                        className="w-10 sm:w-16 h-auto transform -scale-x-100"
-                    />
-                </div>
+            </div>
 
+            {/* Background & Footer Graphics */}
+            <div className="absolute bottom-0 left-0 w-full z-0 pointer-events-none">
                 {/* Footer Gradient / Ground */}
                 <img
                     src="/images/section/games/pic/games-footer.svg"
                     alt="Ground footer"
-                    className="w-full h-auto object-cover object-bottom"
+                    className="w-full h-auto object-cover object-bottom translate-y-7"
                 />
             </div>
         </section>
