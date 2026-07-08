@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { animate } from "animejs";
 import { useGameLogic } from "../../hooks/useGameLogic";
 import { useDrag } from "../../hooks/useDrag";
 import TrashBin from "../ui/TrashBin";
@@ -27,6 +28,7 @@ export default function GameSection({ onFinish }: GameSectionProps) {
 
     const [showPopup, setShowPopup] = useState(false);
     const [headerFeedback, setHeaderFeedback] = useState<"default" | "success" | "error">("default");
+    const headerRef = useRef<HTMLHeadingElement>(null);
 
     useEffect(() => {
         if (isFinished) {
@@ -101,6 +103,13 @@ export default function GameSection({ onFinish }: GameSectionProps) {
                 setHeaderFeedback("error");
                 setShakingBin({ category: targetCategory, type: "error" });
                 resetPosition(true);
+                if (headerRef.current) {
+                    animate(headerRef.current, {
+                        translateX: [-10, 10, -10, 10, 0],
+                        duration: 300,
+                        ease: 'inOutSine'
+                    });
+                }
             }
         },
     });
@@ -126,6 +135,7 @@ export default function GameSection({ onFinish }: GameSectionProps) {
             {/* Header / Title */}
             <div className="text-center z-10 px-4 mb-8 sm:mb-12">
                 <h2
+                    ref={headerRef}
                     className={`text-[40px] md:text-[64px] font-extrabold mb-4 drop-shadow-sm leading-normal transition-colors duration-500 ${
                         !isFinished && headerFeedback === "error"
                             ? "text-[#DE261E]"
