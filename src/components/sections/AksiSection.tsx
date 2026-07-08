@@ -84,13 +84,13 @@ export default function AksiSection({ onBack }: { onBack?: () => void }) {
                         <div className="h-48 flex items-center justify-center mb-6 w-full">
                             <Image src={card.imageSrc} alt={card.title} className="max-h-full w-auto object-contain" />
                         </div>
-                        <h4 className="text-[#00A3FF] text-2xl font-bold mb-3" style={{ fontFamily: "'Afacad', sans-serif" }}>{card.title.split(":")[1]?.trim() || card.title}</h4>
-                        <p className="text-base text-gray-200 flex-grow mb-8" style={{ fontFamily: "'Afacad', sans-serif", lineHeight: "1.6" }}>
+                        <h4 className="text-[#00A3FF] text-2xl md:text-3xl font-bold mb-3 min-h-[4rem] md:min-h-[5.5rem] flex items-center justify-center" style={{ fontFamily: "'Afacad', sans-serif" }}>{card.title.split(":")[1]?.trim() || card.title}</h4>
+                        <p className="text-base md:text-lg text-gray-200 mb-8 min-h-[4.5rem] md:min-h-[6.5rem] flex items-center justify-center" style={{ fontFamily: "'Afacad', sans-serif", lineHeight: "1.6" }}>
                             {card.shortDesc}
                         </p>
                         <button 
                             onClick={() => setSelectedCard(index)}
-                            className="text-gray-350 hover:text-[#00A3FF] transition-colors text-base font-semibold flex items-center gap-2 mt-auto"
+                            className="text-gray-350 hover:text-[#00A3FF] transition-colors text-base md:text-lg font-semibold flex items-center gap-2 mt-auto"
                         >
                             Lihat Selengkapnya <span>→</span>
                         </button>
