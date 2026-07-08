@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SplashScreen from "../components/ui/SplashScreen";
 import HeroSection from "../components/sections/HeroSection";
 import GameSection from "../components/sections/GameSection";
@@ -11,7 +11,20 @@ import FactSection from "../components/sections/FactSection";
 export default function Home() {
     const [splashDone, setSplashDone] = useState(false);
     const [isGameFinished, setIsGameFinished] = useState(false);
+    const [hasGameFinishedOnce, setHasGameFinishedOnce] = useState(false);
     const [selectedPill, setSelectedPill] = useState<'aksi' | 'fact' | null>(null);
+
+    useEffect(() => {
+        if (isGameFinished) {
+            setHasGameFinishedOnce(true);
+            setTimeout(() => {
+                const choiceSection = document.getElementById('choice-section');
+                if (choiceSection) {
+                    choiceSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 400); // Wait for the transition/fade-in to trigger
+        }
+    }, [isGameFinished]);
 
     const handlePillSelect = (pill: 'aksi' | 'fact') => {
         setSelectedPill(pill);
@@ -33,7 +46,7 @@ export default function Home() {
                 <HeroSection />
                 <GameSection onFinish={(status) => setIsGameFinished(status)} />
 
-                {isGameFinished && (
+                {hasGameFinishedOnce && (
                     <div className="animate-fade-in transition-opacity duration-1000 flex flex-col -mt-1">
                         {/* Thin Transition Gradient from GameSection to ChoiceSection */}
                         <div className="w-full h-12 md:h-16 bg-gradient-to-b from-[#EBF4F9] to-[#071120]"></div>

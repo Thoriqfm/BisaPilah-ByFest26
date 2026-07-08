@@ -11,11 +11,10 @@ import {
 } from "../../../public/images/section/choice";
 
 interface ChoiceSectionProps {
-  onPillSelect?: (pill: 'aksi' | 'fact') => void;
+  onPillSelect?: (pill: "aksi" | "fact") => void;
 }
 
 export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
-
   const leftHandRef = useRef<HTMLImageElement>(null);
   const rightHandRef = useRef<HTMLImageElement>(null);
 
