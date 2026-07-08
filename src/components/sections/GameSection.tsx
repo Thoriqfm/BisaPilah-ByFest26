@@ -208,7 +208,7 @@ export default function GameSection({ onFinish }: GameSectionProps) {
             {/* Popup Modal */}
             {isFinished && showPopup && (
                 <div className="absolute inset-0 z-50 flex items-center justify-center bg-transparent px-4 animate-fade-in">
-                    <div className="relative bg-[#EBF9EE] border-10 border-[#2E7D32] rounded-[3rem] p-8 md:p-12 min-h-[450px] md:min-h-[550px] max-w-4xl w-full text-center flex flex-col items-center justify-center animate-fade-in-up mt-12 shadow-2xl">
+                    <div className="relative bg-[#EBF9EE] border-[6px] border-[#2E7D32] rounded-[3rem] p-8 md:p-12 min-h-[450px] md:min-h-[550px] max-w-4xl w-full text-center flex flex-col items-center justify-center animate-fade-in-up mt-32 shadow-2xl">
                         {/* Text and Image Wrapper */}
                         <div className="mt-36 md:mt-56 w-full relative flex flex-col items-center z-10">
                             {/* Farmer Woman Image (Anchored perfectly to the text) */}
