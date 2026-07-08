@@ -26,6 +26,7 @@ export default function GameSection({ onFinish }: GameSectionProps) {
     } = useGameLogic();
 
     const [showPopup, setShowPopup] = useState(false);
+    const [headerFeedback, setHeaderFeedback] = useState<"default" | "success" | "error">("default");
 
     useEffect(() => {
         if (isFinished) {
@@ -91,11 +92,13 @@ export default function GameSection({ onFinish }: GameSectionProps) {
             const isSuccess = handleDrop(currentItem.category, targetCategory);
 
             if (isSuccess) {
+                setHeaderFeedback("success");
                 setShakingBin({ category: targetCategory, type: "success" });
                 dropIntoBin(targetBin, () => {
                     advanceToNextItem();
                 });
             } else {
+                setHeaderFeedback("error");
                 setShakingBin({ category: targetCategory, type: "error" });
                 resetPosition(true);
             }
@@ -123,11 +126,19 @@ export default function GameSection({ onFinish }: GameSectionProps) {
             {/* Header / Title */}
             <div className="text-center z-10 px-4 mb-8 sm:mb-12">
                 <h2
-                    className="text-[40px] md:text-[64px] font-extrabold text-[#044800] mb-4 drop-shadow-sm leading-normal transition-all duration-500"
+                    className={`text-[40px] md:text-[64px] font-extrabold mb-4 drop-shadow-sm leading-normal transition-colors duration-500 ${
+                        !isFinished && headerFeedback === "error"
+                            ? "text-[#DE261E]"
+                            : "text-[#044800]"
+                    }`}
                     style={{ fontFamily: '"MOON GET!", sans-serif' }}
                 >
                     {isFinished
                         ? "Selesai, Hebat!"
+                        : headerFeedback === "success"
+                        ? "Bagus, Lanjutkan!"
+                        : headerFeedback === "error"
+                        ? "Coba Perhatikan Lagi!"
                         : "Coba Pilahlah Sampah Ini!"}
                 </h2>
                 <p
@@ -247,6 +258,7 @@ export default function GameSection({ onFinish }: GameSectionProps) {
                                     onClick={() => {
                                         setShowPopup(false);
                                         resetGame();
+                                        setHeaderFeedback("default");
                                     }}
                                     className="relative w-60 h-11 bg-[#E52D2D] hover:bg-[#D32F2F] text-white font-bold rounded-[50px] transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 text-[18px] shadow-md"
                                     style={{
