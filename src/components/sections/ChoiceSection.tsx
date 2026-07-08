@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-
 import { animate } from "animejs";
-
 import {
   manImg,
   tanganBiruKiri,
@@ -22,7 +20,7 @@ export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
     if (ref.current) {
       ref.current.style.zIndex = "50";
       animate(ref.current, {
-        scale: 1.35,
+        scale: 1.1,
         duration: 600,
         ease: "outElastic(1, .6)",
       });
@@ -45,99 +43,140 @@ export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
       id="choice-section"
       className="relative w-full h-screen bg-[#071120] flex flex-col items-center justify-center overflow-hidden select-none"
     >
-      {/* Title (Behind the center man) */}
-      <div className="absolute top-[8%] md:top-[0%] w-full flex justify-center items-center z-0">
+      {/* ── Title (z-0, pria tengah overlap kepala ke sini) ── */}
+      <div className="absolute top-[4%] w-full flex justify-center items-center z-0">
         <h2
-          className="text-[4rem] md:text-[8rem] lg:text-[11rem] font-black tracking-wide drop-shadow-lg text-center"
-          style={{ fontFamily: '"Moon Get", sans-serif' }}
+          className="font-black tracking-wide drop-shadow-lg text-center leading-none"
+          style={{
+            fontFamily: '"Moon Get", sans-serif',
+            fontSize: "clamp(2.8rem, 11vw, 11rem)",
+          }}
         >
           <span className="text-[#00A3FF]">Pilih</span>{" "}
           <span className="text-[#FF3333]">Jalanmu</span>
         </h2>
       </div>
 
-      {/* Background Men - 2 side faded */}
-      {/* They are pushed down and scaled down so the center man is distinctly taller */}
-      <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-10 top-[5%] md:top-[8%]">
-        {/* Left Man */}
-        <div className="absolute -translate-x-[35%] md:-translate-x-[60%] opacity-[0.2] brightness-[0.7] mix-blend-screen w-[220px] md:w-[700px]">
+      {/* ── Ghost men – kiri & kanan, lebih besar & terlihat ── */}
+      <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-10">
+        {/* Left ghost man */}
+        <div
+          className="absolute opacity-[0.35] brightness-[0.8]"
+          style={{
+            width: "clamp(180px, 32vw, 680px)",
+            transform: "translateX(-55%)",
+          }}
+        >
           <img
             src={manImg}
             alt="Man Left"
             className="w-full h-auto"
             style={{
               WebkitMaskImage:
-                "linear-gradient(to bottom, black 60%, transparent 100%)",
+                "linear-gradient(to bottom, black 65%, transparent 100%)",
               maskImage:
-                "linear-gradient(to bottom, black 60%, transparent 100%)",
+                "linear-gradient(to bottom, black 65%, transparent 100%)",
             }}
           />
         </div>
-        {/* Right Man */}
-        <div className="absolute translate-x-[35%] md:translate-x-[60%] opacity-[0.2] brightness-[0.7] mix-blend-screen w-[220px] md:w-[700px]">
+        {/* Right ghost man */}
+        <div
+          className="absolute opacity-[0.35] brightness-[0.8]"
+          style={{
+            width: "clamp(180px, 32vw, 680px)",
+            transform: "translateX(55%)",
+          }}
+        >
           <img
             src={manImg}
             alt="Man Right"
             className="w-full h-auto"
             style={{
               WebkitMaskImage:
-                "linear-gradient(to bottom, black 60%, transparent 100%)",
+                "linear-gradient(to bottom, black 65%, transparent 100%)",
               maskImage:
-                "linear-gradient(to bottom, black 60%, transparent 100%)",
+                "linear-gradient(to bottom, black 65%, transparent 100%)",
             }}
           />
         </div>
       </div>
 
-      {/* Center Man (In front of title, behind hands) */}
-      {/* He is huge so his head reaches the title and he stands taller than side men */}
-      <div className="absolute bottom-[-5%] md:bottom-[10%] z-20 w-[450px] md:w-[750px] lg:w-[950px] pointer-events-none flex justify-center">
+      {/* ── Center Man – lebih besar, kepala melewati judul ── */}
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
+        style={{ width: "clamp(320px, 65vw, 1100px)" }}
+      >
         <img
           src={manImg}
           alt="Man Center"
           className="w-full h-auto drop-shadow-2xl"
           style={{
             WebkitMaskImage:
-              "linear-gradient(to bottom, black 70%, transparent 100%)",
+              "linear-gradient(to bottom, black 72%, transparent 100%)",
             maskImage:
-              "linear-gradient(to bottom, black 70%, transparent 100%)",
+              "linear-gradient(to bottom, black 72%, transparent 100%)",
           }}
         />
       </div>
 
-      {/* Texts: Aksi & Fact (Positioned at neck level of side men, above hands) */}
-      <div className="absolute top-[40%] md:top-[45%] w-full max-w-[500px] md:max-w-[1050px] lg:max-w-[1300px] left-1/2 -translate-x-1/2 flex justify-between px-6 md:px-12 z-10 pointer-events-none">
+      {/* ── Label Aksi & Fakta ── */}
+      <div
+        className="absolute w-full flex justify-between items-center z-40 pointer-events-none"
+        style={{
+          top: "38%",
+          paddingLeft: "clamp(1rem, 14vw, 18rem)",
+          paddingRight: "clamp(1rem, 14vw, 18rem)",
+        }}
+      >
         <h3
-          className="text-5xl md:text-[6.5rem] font-black text-[#00A3FF] tracking-wide drop-shadow-[0_0_15px_rgba(0,163,255,0.4)]"
-          style={{ fontFamily: '"Moon Get", sans-serif' }}
+          className="font-black text-[#00A3FF] tracking-wide drop-shadow-[0_0_20px_rgba(0,163,255,0.55)]"
+          style={{
+            fontFamily: '"Moon Get", sans-serif',
+            fontSize: "clamp(2.2rem, 7.5vw, 6.5rem)",
+          }}
         >
           Aksi
         </h3>
         <h3
-          className="text-5xl md:text-[6.5rem] font-black text-[#FF3333] tracking-wide drop-shadow-[0_0_15px_rgba(255,51,51,0.4)] translate-x-6 md:translate-x-12"
-          style={{ fontFamily: '"Moon Get", sans-serif' }}
+          className="font-black text-[#FF3333] tracking-wide drop-shadow-[0_0_20px_rgba(255,51,51,0.55)]"
+          style={{
+            fontFamily: '"Moon Get", sans-serif',
+            fontSize: "clamp(2.2rem, 7.5vw, 6.5rem)",
+          }}
         >
           Fakta
         </h3>
       </div>
 
-      {/* Hands (Positioned precisely on the arms of the center man) */}
-      <div className="absolute bottom-[-10%] md:bottom-[-18%] w-full h-full pointer-events-none z-30">
+      {/* ── Hands – besar, hampir menyentuh tengah ── */}
+      <div className="absolute inset-0 pointer-events-none z-30">
+        {/* Left hand – blue / Aksi */}
         <img
           ref={leftHandRef}
           src={tanganBiruKiri}
-          alt="Aksi Hand"
-          className="absolute bottom-42 left-[2%] md:left-[15%] lg:left-[20%] w-[180px] md:w-[320px] lg:w-[460px] origin-bottom-left pointer-events-auto cursor-pointer drop-shadow-2xl hover:brightness-110 transition-[filter]"
+          alt="Pilih Aksi"
+          className="absolute origin-bottom-left pointer-events-auto cursor-pointer drop-shadow-2xl hover:brightness-110 transition-[filter]"
+          style={{
+            width: "clamp(140px, 24vw, 420px)",
+            bottom: "clamp(3%, 5vh, 8%)",
+            left: "clamp(1rem, 18vw, 26%)",
+          }}
           onMouseEnter={() => handleHoverEnter(leftHandRef)}
           onMouseLeave={() => handleHoverLeave(leftHandRef)}
           onClick={() => onPillSelect && onPillSelect("aksi")}
         />
 
+        {/* Right hand – red / Fakta */}
         <img
           ref={rightHandRef}
           src={tanganMerahKanan}
-          alt="Fact Hand"
-          className="absolute bottom-42 right-[2%] md:right-[15%] lg:right-[20%] w-[180px] md:w-[320px] lg:w-[460px] origin-bottom-right pointer-events-auto cursor-pointer drop-shadow-2xl hover:brightness-110 transition-[filter]"
+          alt="Pilih Fakta"
+          className="absolute origin-bottom-right pointer-events-auto cursor-pointer drop-shadow-2xl hover:brightness-110 transition-[filter]"
+          style={{
+            width: "clamp(140px, 24vw, 420px)",
+            bottom: "clamp(3%, 5vh, 8%)",
+            right: "clamp(1rem, 18vw, 26%)",
+          }}
           onMouseEnter={() => handleHoverEnter(rightHandRef)}
           onMouseLeave={() => handleHoverLeave(rightHandRef)}
           onClick={() => onPillSelect && onPillSelect("fact")}
