@@ -20,19 +20,19 @@ export const trashBins: TrashBinData[] = [
         category: 'ORGANIK',
         defaultImage: '/images/section/games/bin/default/organik-closed.svg',
         openImage: '/images/section/games/bin/open/organik-open.svg',
-        offImage: '/images/section/games/bin/unavailable/organik-off.svg',
+        offImage: '/images/section/games/bin/unavailable/bw-organik.svg',
     },
     {
         category: 'ANORGANIK',
         defaultImage: '/images/section/games/bin/default/anorganik-closed.svg',
         openImage: '/images/section/games/bin/open/anorganik-open.svg',
-        offImage: '/images/section/games/bin/unavailable/anorganik-off.svg',
+        offImage: '/images/section/games/bin/unavailable/bw-anorganik.svg',
     },
     {
         category: 'B3',
         defaultImage: '/images/section/games/bin/default/b3-closed.svg',
         openImage: '/images/section/games/bin/open/b3-open.svg',
-        offImage: '/images/section/games/bin/unavailable/b3-off.svg',
+        offImage: '/images/section/games/bin/unavailable/bw-b3.svg',
     }
 ];
 

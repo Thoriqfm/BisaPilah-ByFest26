@@ -56,15 +56,24 @@ export default function TrashBin({ category, state, shakeError, shakeSuccess, on
     if (state === 'unavailable') imgSrc = binData.offImage;
 
     return (
-        <div 
-            ref={binRef}
-            className="trash-bin-target flex flex-col items-center justify-end w-28 sm:w-36 transition-transform"
-            data-category={category}
-        >
+        <div className="relative flex flex-col items-center justify-end w-28 sm:w-36 h-36 sm:h-48">
+            <div 
+                ref={binRef}
+                className="trash-bin-target flex flex-col items-end justify-end w-28 sm:w-36 transition-transform z-10 absolute bottom-0"
+                data-category={category}
+            >
+                <img 
+                    src={imgSrc} 
+                    alt={`Tong Sampah ${category}`} 
+                    className="w-full h-auto drop-shadow-md pointer-events-none"
+                    draggable={false}
+                />
+            </div>
+            {/* Shadow Assets */}
             <img 
-                src={imgSrc} 
-                alt={`Tong Sampah ${category}`} 
-                className="w-full h-auto drop-shadow-md pointer-events-none"
+                src="/images/section/games/bin/bin-shadow.svg"
+                alt="Shadow"
+                className="absolute -bottom-4 w-[110%] sm:w-[110%] pointer-events-none z-0 opacity-80"
                 draggable={false}
             />
         </div>
