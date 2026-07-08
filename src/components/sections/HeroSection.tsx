@@ -98,7 +98,7 @@ export default function HeroSection() {
 
                 <button
                     onClick={handleScrollToGame}
-                    className="mt-6 flex items-center gap-3 bg-[#1a5c2a] text-[#DDF8E9] font-semibold px-8 py-3 rounded-full border-2 border-[#1a5c2a] shadow-md hover:bg-[#247438] hover:-translate-y-1 hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    className="mt-6 flex items-center justify-center gap-3 bg-[#1a5c2a] text-[#DDF8E9] font-semibold rounded-full border-2 border-[#1a5c2a] shadow-md hover:bg-[#247438] hover:-translate-y-1 hover:shadow-xl transition-all duration-300 cursor-pointer px-6 py-2.5 text-sm md:px-8 md:py-3 md:text-base"
                 >
                     <img
                         src={trashIcon}
