@@ -18,9 +18,11 @@ export default function HeroSection({
     isSplashDone?: boolean;
 }) {
     const handleScrollToGame = () => {
-        document
-            .getElementById("game-section")
-            ?.scrollIntoView({ behavior: "smooth" });
+        const gameSection = document.getElementById("game-section");
+        if (gameSection) {
+            const top = gameSection.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top, behavior: "smooth" });
+        }
     };
 
     const animated = useRef(false);
@@ -68,54 +70,56 @@ export default function HeroSection({
 
     return (
         <section className="relative min-h-screen overflow-hidden bg-[#F3FBFF]">
-            {/* Background Illustration */}
-            <div className="absolute inset-0 z-2">
-                <img
-                    src={heroBg}
-                    alt=""
-                    className="w-full h-full object-cover"
-                />
+            {/* Background Illustration & Clouds */}
+            <div className="absolute inset-0 z-0 flex justify-center overflow-hidden pointer-events-none">
+                <div className="relative w-full h-full min-w-[1200px]">
+                    <img
+                        src={heroBg}
+                        alt=""
+                        className="absolute inset-0 w-full h-full object-cover object-bottom z-10"
+                    />
+                    <img
+                        src={awanKiriAtas}
+                        alt=""
+                        className="absolute z-1 awan-kiri opacity-0"
+                        style={{
+                            top: "8%",
+                            left: "-4.5%",
+                            width: "50%",
+                        }}
+                    />
+                    <img
+                        src={awanKananAtas}
+                        alt=""
+                        className="absolute z-1 awan-kanan opacity-0"
+                        style={{
+                            top: "3%",
+                            right: "-18%",
+                            width: "57%",
+                        }}
+                    />
+                    <img
+                        src={awanKiriBawah}
+                        alt=""
+                        className="absolute z-1 awan-kiri opacity-0"
+                        style={{
+                            top: "67.5%",
+                            left: "13%",
+                            width: "45%",
+                        }}
+                    />
+                    <img
+                        src={awanKananBawah}
+                        alt=""
+                        className="absolute z-1 awan-kanan opacity-0"
+                        style={{
+                            top: "61%",
+                            right: "5%",
+                            width: "35%",
+                        }}
+                    />
+                </div>
             </div>
-            <img
-                src={awanKiriAtas}
-                alt=""
-                className="absolute z-1 pointer-events-none awan-kiri opacity-0"
-                style={{
-                    top: "8%",
-                    left: "-4.5%",
-                    width: "50%",
-                }}
-            />
-            <img
-                src={awanKananAtas}
-                alt=""
-                className="absolute z-1 pointer-events-none awan-kanan opacity-0"
-                style={{
-                    top: "3%",
-                    right: "-18%",
-                    width: "57%",
-                }}
-            />
-            <img
-                src={awanKiriBawah}
-                alt=""
-                className="absolute z-1 pointer-events-none awan-kiri opacity-0"
-                style={{
-                    top: "67.5%",
-                    left: "13%",
-                    width: "45%",
-                }}
-            />
-            <img
-                src={awanKananBawah}
-                alt=""
-                className="absolute z-1 pointer-events-none awan-kanan opacity-0"
-                style={{
-                    top: "61%",
-                    right: "5%",
-                    width: "35%",
-                }}
-            />
 
             {/* Content */}
             <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-6 -translate-y-5">

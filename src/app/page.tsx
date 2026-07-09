@@ -38,7 +38,7 @@ export default function Home() {
             <SplashScreen onComplete={() => setSplashDone(true)} />
             {/* )} */}
 
-            <main className="overflow-x-hidden">
+            <main>
                 <HeroSection isSplashDone={splashDone} />
                 <GameSection onFinish={(status) => setIsGameFinished(status)} />
 

@@ -27,7 +27,9 @@ export default function GameSection({ onFinish }: GameSectionProps) {
     } = useGameLogic();
 
     const [showPopup, setShowPopup] = useState(false);
-    const [headerFeedback, setHeaderFeedback] = useState<"default" | "success" | "error">("default");
+    const [headerFeedback, setHeaderFeedback] = useState<
+        "default" | "success" | "error"
+    >("default");
     const headerRef = useRef<HTMLHeadingElement>(null);
 
     useEffect(() => {
@@ -107,7 +109,7 @@ export default function GameSection({ onFinish }: GameSectionProps) {
                     animate(headerRef.current, {
                         translateX: [-10, 10, -10, 10, 0],
                         duration: 300,
-                        ease: 'inOutSine'
+                        ease: "inOutSine",
                     });
                 }
             }
@@ -117,7 +119,7 @@ export default function GameSection({ onFinish }: GameSectionProps) {
     return (
         <section
             id="game-section"
-            className="relative min-h-screen bg-[#EBF4F9] flex flex-col items-center pt-20 sm:pt-28 select-none"
+            className="relative h-[100dvh] w-full bg-[#EBF4F9] flex flex-col items-center pt-[5vh] sm:pt-[8vh] select-none overflow-x-clip"
         >
             {/* Transition Blur */}
             <div
@@ -133,27 +135,33 @@ export default function GameSection({ onFinish }: GameSectionProps) {
             />
 
             {/* Header / Title */}
-            <div className="text-center z-10 px-4 mb-8 sm:mb-12">
+            <div className="text-center z-10 px-4 mb-[2vh] sm:mb-[4vh]">
                 <h2
                     ref={headerRef}
-                    className={`text-[40px] md:text-[64px] font-extrabold mb-4 drop-shadow-sm leading-normal transition-colors duration-500 ${
+                    className={`font-extrabold mb-2 sm:mb-4 drop-shadow-sm leading-normal transition-colors duration-500 ${
                         !isFinished && headerFeedback === "error"
                             ? "text-[#DE261E]"
                             : "text-[#044800]"
                     }`}
-                    style={{ fontFamily: '"MOON GET!", sans-serif' }}
+                    style={{
+                        fontFamily: '"MOON GET!", sans-serif',
+                        fontSize: "clamp(1.75rem, 4vw, 3.5rem)",
+                    }}
                 >
                     {isFinished
                         ? "Selesai, Hebat!"
                         : headerFeedback === "success"
-                        ? "Bagus, Lanjutkan!"
-                        : headerFeedback === "error"
-                        ? "Coba Perhatikan Lagi!"
-                        : "Coba Pilahlah Sampah Ini!"}
+                          ? "Bagus, Lanjutkan!"
+                          : headerFeedback === "error"
+                            ? "Coba Perhatikan Lagi!"
+                            : "Coba Pilahlah Sampah Ini!"}
                 </h2>
                 <p
-                    className="text-[20px] md:text-[32px] font-bold text-[#044800] mb-4 leading-normal text-center transition-all duration-500"
-                    style={{ fontFamily: "'Afacad', sans-serif" }}
+                    className="font-bold text-[#044800] mb-2 sm:mb-4 leading-normal text-center transition-all duration-500"
+                    style={{
+                        fontFamily: "'Afacad', sans-serif",
+                        fontSize: "clamp(0.5rem, 1.5vw, 1.563rem)",
+                    }}
                 >
                     {isFinished
                         ? "Mari bersama kita mulai dari sini, untuk bumi yang terus mengabdi!"
@@ -168,16 +176,16 @@ export default function GameSection({ onFinish }: GameSectionProps) {
             </div>
 
             {/* Game Area */}
-            <div className="relative w-full max-w-4xl grow flex flex-col items-center justify-between z-10">
+            <div className="relative w-full max-w-4xl flex-1 flex flex-col items-center justify-between z-10 min-h-0">
                 {/* Active Trash Item */}
-                <div className="grow flex items-center justify-center mt-10 translate-y-[-20%]">
+                <div className="flex-1 w-full flex items-center justify-center pb-[10vh] min-h-0">
                     {currentItem && !isFinished ? (
                         <TrashItem ref={itemRef} item={currentItem} />
                     ) : null}
                 </div>
 
                 {/* Trash Bins Container */}
-                <div className="w-full flex justify-center items-end gap-6 sm:gap-12 md:gap-16 lg:gap-24 px-4 mb-32 sm:mb-40">
+                <div className="w-full flex justify-center items-end gap-6 sm:gap-12 md:gap-16 lg:gap-24 px-4 pb-[5vh] md:pb-[8vh]">
                     {(["ORGANIK", "ANORGANIK", "B3"] as WasteCategory[]).map(
                         (cat) => (
                             <TrashBin
@@ -222,7 +230,7 @@ export default function GameSection({ onFinish }: GameSectionProps) {
                 <img
                     src="/images/section/games/pic/games-footer.svg"
                     alt="Ground footer"
-                    className="w-full h-auto object-cover object-bottom translate-y-7"
+                    className="w-full h-auto object-cover object-bottom"
                 />
             </div>
 
