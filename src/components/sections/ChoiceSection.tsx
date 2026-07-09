@@ -20,7 +20,8 @@ export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
     if (ref.current) {
       ref.current.style.zIndex = "50";
       animate(ref.current, {
-        scale: 1.1,
+        scale: 1.05,
+        translateY: -10,
         duration: 600,
         ease: "outElastic(1, .6)",
       });
@@ -32,6 +33,7 @@ export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
       ref.current.style.zIndex = "30";
       animate(ref.current, {
         scale: 1,
+        translateY: 0,
         duration: 400,
         ease: "outQuad",
       });
@@ -41,15 +43,15 @@ export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
   return (
     <section
       id="choice-section"
-      className="relative w-full h-screen bg-[#071120] flex flex-col items-center justify-center overflow-hidden select-none"
+      className="relative w-full h-[100dvh] bg-[#071120] flex flex-col md:items-center justify-center overflow-hidden select-none"
     >
-      {/* ── Title (z-0, pria tengah overlap kepala ke sini) ── */}
-      <div className="absolute top-[4%] w-full flex justify-center items-center z-0">
+      {/* ── 1. TITLE (Dikeluarkan dari kanvas agar di HP posisinya selalu di atas) ── */}
+      <div className="absolute top-[25%] md:top-[8%] w-full flex justify-center items-center z-10 pointer-events-none">
         <h2
           className="font-black tracking-wide drop-shadow-lg text-center leading-none"
           style={{
             fontFamily: '"Moon Get", sans-serif',
-            fontSize: "clamp(2.8rem, 11vw, 11rem)",
+            fontSize: "clamp(2.2rem, 8vw, 10rem)", // Sedikit disesuaikan clamp-nya agar aman di HP portrait
           }}
         >
           <span className="text-[#00A3FF]">Pilih</span>{" "}
@@ -57,125 +59,124 @@ export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
         </h2>
       </div>
 
-      {/* ── Ghost men – kiri & kanan, lebih besar & terlihat ── */}
-      <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-10">
-        {/* Left ghost man */}
+      {/* ── KANVAS UTAMA (Tetap mengunci rasio 16:9 di semua device) ── */}
+      <div className="relative w-full aspect-[16/9] max-h-screen max-w-[calc(100vh*16/9)] flex items-center justify-center mx-auto">
+        {/* ── 2. GHOST MEN (Kiri & Kanan) ── */}
+        <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-10">
+          {/* Ghost Kiri */}
+          <div
+            className="absolute opacity-[0.35] brightness-[0.8]"
+            style={{
+              width: "34%",
+              bottom: "26%",
+              left: "10%",
+            }}
+          >
+            <img
+              src={manImg}
+              alt="Man Left"
+              className="w-full h-auto object-contain"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, black 65%, transparent 100%)",
+                maskImage:
+                  "linear-gradient(to bottom, black 65%, transparent 100%)",
+              }}
+            />
+          </div>
+          {/* Ghost Kanan */}
+          <div
+            className="absolute opacity-[0.35] brightness-[0.8]"
+            style={{
+              width: "34%",
+              bottom: "26%",
+              right: "10%",
+            }}
+          >
+            <img
+              src={manImg}
+              alt="Man Right"
+              className="w-full h-auto object-contain"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, black 65%, transparent 100%)",
+                maskImage:
+                  "linear-gradient(to bottom, black 65%, transparent 100%)",
+              }}
+            />
+          </div>
+        </div>
+
+        {/* ── 3. CENTER MAN ── */}
         <div
-          className="absolute opacity-[0.35] brightness-[0.8]"
+          className="absolute left-1/2 -translate-x-1/2 z-20 pointer-events-none flex justify-center"
           style={{
-            width: "clamp(180px, 32vw, 680px)",
-            transform: "translateX(-55%)",
+            width: "44%",
+            bottom: "30%",
           }}
         >
           <img
             src={manImg}
-            alt="Man Left"
-            className="w-full h-auto"
+            alt="Man Center"
+            className="w-full h-auto max-h-[90vh] object-contain object-bottom drop-shadow-2xl"
             style={{
               WebkitMaskImage:
-                "linear-gradient(to bottom, black 65%, transparent 100%)",
+                "linear-gradient(to bottom, black 80%, transparent 100%)",
               maskImage:
-                "linear-gradient(to bottom, black 65%, transparent 100%)",
+                "linear-gradient(to bottom, black 80%, transparent 100%)",
             }}
           />
         </div>
-        {/* Right ghost man */}
-        <div
-          className="absolute opacity-[0.35] brightness-[0.8]"
-          style={{
-            width: "clamp(180px, 32vw, 680px)",
-            transform: "translateX(55%)",
-          }}
-        >
-          <img
-            src={manImg}
-            alt="Man Right"
-            className="w-full h-auto"
-            style={{
-              WebkitMaskImage:
-                "linear-gradient(to bottom, black 65%, transparent 100%)",
-              maskImage:
-                "linear-gradient(to bottom, black 65%, transparent 100%)",
-            }}
-          />
-        </div>
-      </div>
 
-      {/* ── Center Man – lebih besar, kepala melewati judul ── */}
-      <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
-        style={{ width: "clamp(320px, 65vw, 1100px)" }}
-      >
-        <img
-          src={manImg}
-          alt="Man Center"
-          className="w-full h-auto drop-shadow-2xl"
-          style={{
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black 72%, transparent 100%)",
-            maskImage:
-              "linear-gradient(to bottom, black 72%, transparent 100%)",
-          }}
-        />
-      </div>
-
-      {/* ── Label Aksi & Fakta ── */}
-      <div
-        className="absolute w-full flex justify-between items-center z-40 pointer-events-none"
-        style={{
-          top: "38%",
-          paddingLeft: "clamp(1rem, 14vw, 18rem)",
-          paddingRight: "clamp(1rem, 14vw, 18rem)",
-        }}
-      >
+        {/* ── 4. LABEL AKSI & FACT ── */}
         <h3
-          className="font-black text-[#00A3FF] tracking-wide drop-shadow-[0_0_20px_rgba(0,163,255,0.55)]"
+          className="absolute font-black text-[#00A3FF] tracking-wide drop-shadow-[0_0_20px_rgba(0,163,255,0.55)] z-40 pointer-events-none"
           style={{
+            top: "34%",
+            left: "18%",
             fontFamily: '"Moon Get", sans-serif',
-            fontSize: "clamp(2.2rem, 7.5vw, 6.5rem)",
+            fontSize: "clamp(1.8rem, 6vw, 7rem)",
           }}
         >
           Aksi
         </h3>
         <h3
-          className="font-black text-[#FF3333] tracking-wide drop-shadow-[0_0_20px_rgba(255,51,51,0.55)]"
+          className="absolute font-black text-[#FF3333] tracking-wide drop-shadow-[0_0_20px_rgba(255,51,51,0.55)] z-40 pointer-events-none"
           style={{
+            top: "34%",
+            right: "12%",
             fontFamily: '"Moon Get", sans-serif',
-            fontSize: "clamp(2.2rem, 7.5vw, 6.5rem)",
+            fontSize: "clamp(1.8rem, 6vw, 7rem)",
           }}
         >
           Fakta
         </h3>
-      </div>
 
-      {/* ── Hands – besar, hampir menyentuh tengah ── */}
-      <div className="absolute inset-0 pointer-events-none z-30">
-        {/* Left hand – blue / Aksi */}
+        {/* ── 5. HANDS ── */}
         <img
           ref={leftHandRef}
           src={tanganBiruKiri}
           alt="Pilih Aksi"
-          className="absolute origin-bottom-left pointer-events-auto cursor-pointer drop-shadow-2xl hover:brightness-110 transition-[filter]"
+          className="absolute origin-bottom-left pointer-events-auto cursor-pointer drop-shadow-2xl hover:brightness-110 transition-[filter] z-30"
           style={{
-            width: "clamp(140px, 24vw, 420px)",
-            bottom: "clamp(3%, 5vh, 8%)",
-            left: "clamp(1rem, 18vw, 26%)",
+            width: "25%",
+            bottom: "12%",
+            left: "24%",
           }}
           onMouseEnter={() => handleHoverEnter(leftHandRef)}
           onMouseLeave={() => handleHoverLeave(leftHandRef)}
           onClick={() => onPillSelect && onPillSelect("aksi")}
         />
 
-        {/* Right hand – red / Fakta */}
         <img
           ref={rightHandRef}
           src={tanganMerahKanan}
           alt="Pilih Fakta"
-          className="absolute origin-bottom-right pointer-events-auto cursor-pointer drop-shadow-2xl hover:brightness-110 transition-[filter]"
+          className="absolute origin-bottom-right pointer-events-auto cursor-pointer drop-shadow-2xl hover:brightness-110 transition-[filter] z-30"
           style={{
-            width: "clamp(140px, 24vw, 420px)",
-            bottom: "clamp(3%, 5vh, 8%)",
-            right: "clamp(1rem, 18vw, 26%)",
+            width: "25%",
+            bottom: "12%",
+            right: "24%",
           }}
           onMouseEnter={() => handleHoverEnter(rightHandRef)}
           onMouseLeave={() => handleHoverLeave(rightHandRef)}
