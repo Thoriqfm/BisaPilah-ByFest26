@@ -178,7 +178,7 @@ export default function GameSection({ onFinish }: GameSectionProps) {
             {/* Game Area */}
             <div className="relative w-full max-w-4xl flex-1 flex flex-col items-center justify-between z-10 min-h-0">
                 {/* Active Trash Item */}
-                <div className="flex-1 w-full flex items-center justify-center translate-y-[-15%] translate-x-[1%] min-h-0">
+                <div className="flex-1 w-full flex items-center justify-center pb-[10vh] min-h-0">
                     {currentItem && !isFinished ? (
                         <TrashItem ref={itemRef} item={currentItem} />
                     ) : null}
