@@ -237,11 +237,11 @@ export default function GameSection({ onFinish }: GameSectionProps) {
             {/* Popup Modal */}
             {isFinished && showPopup && (
                 <div className="absolute inset-0 z-50 flex items-center justify-center bg-transparent px-4 animate-fade-in">
-                    <div className="relative bg-[#EBF9EE] border-[6px] border-[#2E7D32] rounded-[3rem] p-8 md:p-12 min-h-[500px] md:min-h-[600px] max-w-4xl w-full text-center flex flex-col items-center justify-center animate-fade-in-up mt-44 shadow-2xl">
+                    <div className="relative bg-[#EBF9EE] border-[6px] border-[#2E7D32] rounded-[3rem] p-6 md:p-10 min-h-[350px] md:min-h-[450px] max-w-3xl w-full text-center flex flex-col items-center justify-center animate-fade-in-up mt-36 shadow-2xl">
                         {/* Text and Image Wrapper */}
-                        <div className="mt-36 md:mt-56 w-full relative flex flex-col items-center z-10">
+                        <div className="mt-24 md:mt-36 w-full relative flex flex-col items-center z-10">
                             {/* Farmer Woman Image (Anchored perfectly to the text) */}
-                            <div className="absolute -top-[180px] md:-top-[260px] left-1/2 -translate-x-1/2 w-[320px] md:w-[500px] h-auto z-0 pointer-events-none">
+                            <div className="absolute -top-[130px] md:-top-[190px] left-1/2 -translate-x-1/2 w-[240px] md:w-[360px] h-auto z-0 pointer-events-none">
                                 <img
                                     src="/images/section/games/popup/farmer-woman.png"
                                     alt="Farmer Woman"
@@ -250,7 +250,7 @@ export default function GameSection({ onFinish }: GameSectionProps) {
                             </div>
 
                             <h3
-                                className="text-[28px] md:text-[32px] font-extrabold text-[#044800] mb-4 tracking-wide drop-shadow-[0_0_15px_rgba(255,255,255,1)]"
+                                className="text-[22px] md:text-[28px] font-extrabold text-[#044800] mb-3 tracking-wide drop-shadow-[0_0_15px_rgba(255,255,255,1)]"
                                 style={{
                                     fontFamily: '"MOON GET!", sans-serif',
                                     textShadow:
@@ -260,7 +260,7 @@ export default function GameSection({ onFinish }: GameSectionProps) {
                                 Kamu Telah Menyelesaikan Tantangan!
                             </h3>
                             <p
-                                className="text-[20px] md:text-[28px] font-bold text-[#044800] mb-10 drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+                                className="text-[16px] md:text-[22px] font-bold text-[#044800] mb-8 drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
                                 style={{
                                     fontFamily: "'Afacad', sans-serif",
                                     textShadow:
@@ -271,14 +271,14 @@ export default function GameSection({ onFinish }: GameSectionProps) {
                                 lebih tahu?
                             </p>
 
-                            <div className="flex flex-col sm:flex-row gap-10 justify-center items-center w-full max-w-2xl mx-auto">
+                            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center w-full max-w-2xl mx-auto">
                                 <button
                                     onClick={() => {
                                         setShowPopup(false);
                                         resetGame();
                                         setHeaderFeedback("default");
                                     }}
-                                    className="relative w-60 h-11 bg-[#E52D2D] hover:bg-[#D32F2F] text-white font-bold rounded-[50px] transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 text-[18px] shadow-md"
+                                    className="relative w-48 h-10 bg-[#E52D2D] hover:bg-[#D32F2F] text-white font-bold rounded-[50px] transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 text-[16px] shadow-md"
                                     style={{
                                         fontFamily: "'Afacad', sans-serif",
                                     }}
@@ -310,7 +310,7 @@ export default function GameSection({ onFinish }: GameSectionProps) {
                                                 behavior: "smooth",
                                             });
                                     }}
-                                    className="relative w-60 h-11 bg-[#1F8D24] hover:bg-[#1B781F] text-white font-bold rounded-[50px] transition-all hover:scale-105 active:scale-95 flex items-center justify-center text-[18px] shadow-md"
+                                    className="relative w-48 h-10 bg-[#1F8D24] hover:bg-[#1B781F] text-white font-bold rounded-[50px] transition-all hover:scale-105 active:scale-95 flex items-center justify-center text-[16px] shadow-md"
                                     style={{
                                         fontFamily: "'Afacad', sans-serif",
                                     }}
