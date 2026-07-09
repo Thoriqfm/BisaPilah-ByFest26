@@ -57,40 +57,44 @@ export default function AksiSection({ onBack }: { onBack?: () => void }) {
     ];
 
     return (
-        <section id="aksi-section" className="w-full bg-[#071120] text-white py-16 px-4 md:px-8 lg:px-16 flex flex-col items-center">
+        <section id="aksi-section" className="w-full bg-[#071120] text-white py-10 md:py-16 px-4 md:px-8 lg:px-16 flex flex-col items-center">
             {/* Header */}
-            <div className="flex flex-col items-center text-center max-w-4xl mb-16 animate-fade-in">
+            <div className="flex flex-col items-center text-center max-w-4xl mb-10 md:mb-16 animate-fade-in">
                 <div className="flex items-center justify-center gap-4 md:gap-6 mb-4 flex-wrap">
                     <h2 
-                        className="text-5xl md:text-[6.5rem] font-black text-[#00A3FF]"
+                        className="text-4xl md:text-[6.5rem] font-black text-[#00A3FF]"
                         style={{ fontFamily: '"Moon Get", sans-serif' }}
                     >
                         Pil Biru
                     </h2>
-                    <Image src={pilBiruIcon} alt="Pil Biru" className="w-16 md:w-28 h-auto drop-shadow-[0_0_15px_rgba(0,163,255,0.4)]" />
+                    <Image src={pilBiruIcon} alt="Pil Biru" className="w-12 md:w-28 h-auto drop-shadow-[0_0_15px_rgba(0,163,255,0.4)]" />
                 </div>
-                <h3 className="text-3xl md:text-4xl font-bold mb-4 text-[#00A3FF]" style={{ fontFamily: "'Afacad', sans-serif" }}>
+                <h3 className="text-xl md:text-4xl font-bold mb-3 md:mb-4 text-[#00A3FF]" style={{ fontFamily: "'Afacad', sans-serif" }}>
                     Ambil Kendali Mulai Hari Ini
                 </h3>
-                <p className="text-base md:text-lg text-gray-300 max-w-2xl" style={{ fontFamily: "'Afacad', sans-serif" }}>
+                <p className="text-sm md:text-lg text-gray-300 max-w-2xl" style={{ fontFamily: "'Afacad', sans-serif" }}>
                     Anda tidak perlu mengubah dunia dalam semalam. Cukup lakukan hal kecil di dalam rumah dengan langkah ini
                 </p>
             </div>
 
             {/* Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-[1200px] w-full mb-16 animate-fade-in-up" style={{ animationDelay: '150ms' }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 max-w-[1200px] w-full mb-10 md:mb-16 animate-fade-in-up" style={{ animationDelay: '150ms' }}>
                 {cardsData.map((card, index) => (
-                    <div key={index} className="bg-[#0D2141] rounded-[2rem] p-8 flex flex-col items-center text-center hover:-translate-y-4 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(0,163,255,0.2)] transition-all duration-300 shadow-xl border border-white/5 cursor-pointer" onClick={() => setSelectedCard(index)}>
-                        <div className="h-48 flex items-center justify-center mb-6 w-full">
-                            <Image src={card.imageSrc} alt={card.title} className="max-h-full w-auto object-contain" />
+                    <div key={index} className="bg-[#0D2141] rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-8 flex flex-col items-center text-center hover:-translate-y-4 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(0,163,255,0.2)] transition-all duration-300 shadow-xl border border-white/5 cursor-pointer" onClick={() => setSelectedCard(index)}>
+                        <div className="h-36 md:h-48 flex items-center justify-center mb-4 md:mb-6 w-full">
+                            <Image 
+                                src={card.imageSrc} 
+                                alt={card.title} 
+                                className="max-h-28 md:max-h-full w-auto object-contain" 
+                            />
                         </div>
-                        <h4 className="text-[#00A3FF] text-2xl md:text-3xl font-bold mb-3 min-h-[4rem] md:min-h-[5.5rem] flex items-center justify-center" style={{ fontFamily: "'Afacad', sans-serif" }}>{card.title.split(":")[1]?.trim() || card.title}</h4>
-                        <p className="text-base md:text-lg text-gray-200 mb-8 min-h-[4.5rem] md:min-h-[6.5rem] flex items-center justify-center" style={{ fontFamily: "'Afacad', sans-serif", lineHeight: "1.6" }}>
+                        <h4 className="text-[#00A3FF] text-lg md:text-3xl font-bold mb-2 min-h-[3rem] md:min-h-[5.5rem] flex items-center justify-center" style={{ fontFamily: "'Afacad', sans-serif" }}>{card.title.split(":")[1]?.trim() || card.title}</h4>
+                        <p className="text-sm md:text-lg text-gray-200 mb-6 min-h-[4rem] md:min-h-[6.5rem] flex items-center justify-center" style={{ fontFamily: "'Afacad', sans-serif", lineHeight: "1.6" }}>
                             {card.shortDesc}
                         </p>
                         <button 
                             onClick={() => setSelectedCard(index)}
-                            className="text-gray-350 hover:text-[#00A3FF] transition-colors text-base md:text-lg font-semibold flex items-center gap-2 mt-auto"
+                            className="text-gray-350 hover:text-[#00A3FF] transition-colors text-sm md:text-lg font-semibold flex items-center gap-2 mt-auto"
                         >
                             Lihat Selengkapnya <span>→</span>
                         </button>
@@ -108,7 +112,7 @@ export default function AksiSection({ onBack }: { onBack?: () => void }) {
                         if (choiceSection) choiceSection.scrollIntoView({ behavior: 'smooth' });
                     }
                 }}
-                className="bg-[#00A3FF] hover:bg-[#0082CC] text-white px-8 py-3 rounded-full font-semibold transition-colors shadow-[0_0_15px_rgba(0,163,255,0.4)] animate-fade-in-up mb-8"
+                className="bg-[#00A3FF] hover:bg-[#0082CC] text-white px-8 py-3 rounded-full font-semibold transition-colors shadow-[0_0_15px_rgba(0,163,255,0.4)] animate-fade-in-up mb-8 text-sm md:text-base"
                 style={{ fontFamily: "'Afacad', sans-serif", animationDelay: '300ms' }}
             >
                 Selesai Baca, Kembali Memilih
