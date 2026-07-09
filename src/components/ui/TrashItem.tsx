@@ -24,7 +24,7 @@ const TrashItem = forwardRef<HTMLDivElement, TrashItemProps>(
                 <img
                     src={item.image}
                     alt={item.name}
-                    className="w-20 sm:w-24 h-auto drop-shadow-md pointer-events-none mt-4"
+                    className="w-[9vh] sm:w-[11vh] md:w-[13vh] min-w-[50px] max-w-[100px] h-auto drop-shadow-md pointer-events-none mt-4"
                     draggable={false}
                 />
             </div>

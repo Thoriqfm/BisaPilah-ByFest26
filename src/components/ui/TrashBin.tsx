@@ -56,10 +56,10 @@ export default function TrashBin({ category, state, shakeError, shakeSuccess, on
     if (state === 'unavailable') imgSrc = binData.offImage;
 
     return (
-        <div className="relative flex flex-col items-center justify-end w-28 sm:w-36 h-36 sm:h-48">
+        <div className="relative flex flex-col items-center justify-end w-[12vh] sm:w-[15vh] md:w-[18vh] min-w-[70px] max-w-[140px] aspect-[3/4]">
             <div 
                 ref={binRef}
-                className="trash-bin-target flex flex-col items-end justify-end w-28 sm:w-36 transition-transform z-10 absolute bottom-0"
+                className="trash-bin-target flex flex-col items-end justify-end w-full transition-transform z-10 absolute bottom-0"
                 data-category={category}
             >
                 <img 
