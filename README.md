@@ -85,7 +85,7 @@ Pastikan sudah menginstall [Node.js](https://nodejs.org/) (versi 18 atau lebih b
 
 ```bash
 git clone https://github.com/Thoriqfm/BisaPilah-ByFest26.git
-cd sdgs-creativeweb
+cd BisaPilah-ByFest26
 ```
 
 ### 2. Install Dependencies
