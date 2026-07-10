@@ -13,23 +13,33 @@ const TRASH_ITEMS = [
         id: "bahan-kimia",
         src: "/images/splash/bahan-kimia.svg",
         alt: "Bahan Kimia",
+        positionClass: "left-[15%] top-[25%] md:left-[35%] md:top-[30%]",
     },
-    { id: "kresek", src: "/images/splash/kresek.svg", alt: "Kantong Kresek" },
-    { id: "apel", src: "/images/splash/apple.svg", alt: "Sisa Apel" },
-    { id: "telur", src: "/images/splash/telor.svg", alt: "Cangkang Telur" },
-    { id: "ikan", src: "/images/splash/ikan.svg", alt: "Tulang Ikan" },
+    { 
+        id: "kresek", 
+        src: "/images/splash/kresek.svg", 
+        alt: "Kantong Kresek",
+        positionClass: "left-[85%] top-[25%] md:left-[65%] md:top-[30%]",
+    },
+    { 
+        id: "apel", 
+        src: "/images/splash/apple.svg", 
+        alt: "Sisa Apel",
+        positionClass: "left-[15%] top-[50%] md:left-[30%] md:top-[55%]",
+    },
+    { 
+        id: "telur", 
+        src: "/images/splash/telor.svg", 
+        alt: "Cangkang Telur",
+        positionClass: "left-[85%] top-[50%] md:left-[70%] md:top-[55%]",
+    },
+    { 
+        id: "ikan", 
+        src: "/images/splash/ikan.svg", 
+        alt: "Tulang Ikan",
+        positionClass: "left-[50%] top-[12%] md:left-[50%] md:top-[15%]",
+    },
 ];
-
-function randomPos() {
-    const positions = [
-        { x: "35%", y: "30%" },
-        { x: "65%", y: "30%" },
-        { x: "30%", y: "55%" },
-        { x: "70%", y: "55%" },
-        { x: "50%", y: "15%" },
-    ];
-    return positions;
-}
 
 export default function SplashScreen({ onComplete }: SplashScreenProps) {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -39,7 +49,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
     const trashRefs = useRef<(HTMLDivElement | null)[]>([]);
     const onCompleteRef = useRef(onComplete);
     onCompleteRef.current = onComplete;
-    const positions = randomPos();
 
     useEffect(() => {
         const container = containerRef.current;
@@ -88,7 +97,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
         tl.add(
             lid,
             {
-                translateY: [0, -54],
+                translateY: ["0%", "-55%"],
                 duration: 460,
                 ease: "outQuad",
             },
@@ -107,15 +116,15 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                         const binRect = bin.getBoundingClientRect();
                         const elRect = el.getBoundingClientRect();
 
-                        // Titik target: atas / mulut tong sampah
-                        const targetX = window.innerWidth / 2 - 35;
-                        const targetY = binRect.top + 80;
+                        // Target point: top/mouth of the trash bin
+                        const targetX = binRect.left + binRect.width / 2;
+                        const targetY = binRect.top + binRect.height * 0.25;
 
                         const dx = targetX - (elRect.left + elRect.width / 2);
                         const dy = targetY - (elRect.top + elRect.height / 2);
-                        const dropDy = dy + 100; // Jatuh ke dalam tong
+                        const dropDy = dy + (binRect.height * 0.4); // Fall into the bin
 
-                        // Titik puncak lompatan
+                        // Peak of the arc
                         const arcPeakY = Math.min(0, dy) - 120;
 
                         animate(el, {
@@ -136,14 +145,14 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                                 },
                                 {
                                     translateX: dx,
-                                    translateY: dy - 40, // Tepat di atas mulut tong
+                                    translateY: dy - 40, // Just above the mouth of the bin
                                     scale: 0.5,
                                     rotate: i % 2 === 0 ? 240 : -240,
                                     opacity: 1,
                                 },
                                 {
                                     translateX: dx,
-                                    translateY: dropDy, // Masuk ke dalam tong
+                                    translateY: dropDy, // Inside the bin
                                     scale: 0.1,
                                     rotate: i % 2 === 0 ? 360 : -360,
                                     opacity: 0,
@@ -164,7 +173,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
         tl.add(
             lid,
             {
-                translateY: [-54, 0],
+                translateY: ["-55%", "0%"],
                 duration: 500,
                 ease: "outBounce",
             },
@@ -214,77 +223,62 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             {TRASH_ITEMS.map((item, i) => (
                 <div
                     key={item.id}
-                    ref={(el) => {
-                        trashRefs.current[i] = el;
-                    }}
-                    className="absolute"
-                    style={{
-                        left: positions[i].x,
-                        top: positions[i].y,
-                        width: 90,
-                        height: 90,
-                        transform: "translate(-50%, -50%)",
-                    }}
+                    className={`absolute -translate-x-1/2 -translate-y-1/2 ${item.positionClass}`}
                 >
-                    <Image
-                        src={item.src}
-                        alt={item.alt}
-                        fill
-                        className="object-contain"
-                        draggable={false}
-                    />
+                    <div
+                        ref={(el) => {
+                            trashRefs.current[i] = el;
+                        }}
+                        className="w-[60px] h-[60px] sm:w-[75px] sm:h-[75px] md:w-[90px] md:h-[90px]"
+                    >
+                        <Image
+                            src={item.src}
+                            alt={item.alt}
+                            fill
+                            className="object-contain"
+                            draggable={false}
+                            priority
+                        />
+                    </div>
                 </div>
             ))}
 
             {/* Trash bin */}
-            <div
-                ref={binRef}
-                className="absolute"
-                style={{
-                    left: "50%",
-                    top: "50%",
-                    marginLeft: -90,
-                    marginTop: -165,
-                    width: 180,
-                    height: 330,
-                    transformOrigin: "bottom center",
-                }}
-            >
-                {/* Ground shadow */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <div
+                    ref={binRef}
+                    className="relative w-[130px] h-[238px] sm:w-[150px] sm:h-[275px] md:w-[180px] md:h-[330px]"
                     style={{
-                        position: "absolute",
-                        bottom: 6,
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        width: 150,
-                        height: 20,
-                        borderRadius: "50%",
-                        backgroundColor: "rgba(0, 0, 0, 0.2)",
-                        filter: "blur(6px)",
+                        transformOrigin: "bottom center",
                     }}
-                />
-                {/* Lid - separate image */}
-                <Image
-                    ref={lidRef}
-                    src="/images/splash/tutup-tong.svg"
-                    alt="Trash Bin Lid"
-                    width={180}
-                    height={98}
-                    className="absolute left-0 w-full object-contain z-10"
-                    style={{ top: 56, marginLeft: 1 }}
-                    draggable={false}
-                />
-                {/* Body */}
-                <Image
-                    src="/images/splash/body-tong.svg"
-                    alt="Trash Bin Body"
-                    width={180}
-                    height={251}
-                    className="absolute left-0 w-full object-contain z-0"
-                    style={{ bottom: 0 }}
-                    draggable={false}
-                />
+                >
+                    {/* Ground shadow */}
+                    <div
+                        className="absolute left-1/2 bottom-[2%] -translate-x-1/2 w-[80%] h-[6%] rounded-full bg-black/20 blur-[4px] md:blur-md"
+                    />
+                    {/* Lid - separate image */}
+                    <Image
+                        ref={lidRef}
+                        src="/images/splash/tutup-tong.svg"
+                        alt="Trash Bin Lid"
+                        width={180}
+                        height={98}
+                        className="absolute left-0 w-full h-auto object-contain z-10"
+                        style={{ top: "17%", marginLeft: "1%" }}
+                        draggable={false}
+                        priority
+                    />
+                    {/* Body */}
+                    <Image
+                        src="/images/splash/body-tong.svg"
+                        alt="Trash Bin Body"
+                        width={180}
+                        height={251}
+                        className="absolute left-0 bottom-0 w-full h-auto object-contain z-0"
+                        draggable={false}
+                        priority
+                    />
+                </div>
             </div>
             {/* Wipe overlay */}
             <div
