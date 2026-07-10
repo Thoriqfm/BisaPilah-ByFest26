@@ -37,14 +37,12 @@ export default function HeroSection({
                     duration: 2000,
                 },
                 onComplete: () => {
-                    // Continuous wiggle out of sync
                     animate([".awan-kiri", ".awan-kanan"], {
-                        // Start from current position (0) smoothly to either 15px or -15px
                         translateY: () => (Math.random() > 0.5 ? "15px" : "-15px"),
                         alternate: true,
                         loop: true,
-                        duration: () => 3000 + Math.random() * 2000, // Random duration between 3s and 5s
-                        delay: () => Math.random() * 1500, // Random delay so they don't start at the same time
+                        duration: () => 3000 + Math.random() * 2000,
+                        delay: () => Math.random() * 1500,
                         ease: "inOutSine",
                     });
                 },
@@ -56,7 +54,7 @@ export default function HeroSection({
                     translateX: ["-50vw", 0],
                     opacity: [0, 1],
                 },
-                100, // slight delay after splash screen
+                100,
             ).add(
                 ".awan-kanan",
                 {
@@ -65,12 +63,17 @@ export default function HeroSection({
                 },
                 100,
             );
+
+            return () => {
+                tl.pause();
+                animate.remove(".awan-kiri");
+                animate.remove(".awan-kanan");
+            };
         }
     }, [isSplashDone]);
 
     return (
         <section className="relative min-h-screen overflow-hidden bg-[#F3FBFF]">
-            {/* Background Illustration & Clouds */}
             <div className="absolute inset-0 z-0 flex justify-center overflow-hidden pointer-events-none">
                 <div className="relative w-full h-full min-w-[1200px]">
                     <img
@@ -121,7 +124,6 @@ export default function HeroSection({
                 </div>
             </div>
 
-            {/* Content */}
             <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-6 -translate-y-5">
                 <h1
                     className="flex items-baseline select-none"
@@ -136,11 +138,6 @@ export default function HeroSection({
                     <span style={{ color: "#376AB3" }}>aPi</span>
                     <span style={{ color: "#D24127" }}>lah</span>
                 </h1>
-                {/* <img
-                    src={bisapilahImg}
-                    alt="BisaPilah"
-                    className="w-70 md:w-125 lg:w-162.5"
-                /> */}
 
                 <h2 className="text-xl md:text-3xl font-bold text-[#064b10] mt-4">
                     Bantu kamu paham cara pilah sampah!
