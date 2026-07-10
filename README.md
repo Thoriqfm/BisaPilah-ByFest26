@@ -1,8 +1,8 @@
-# 🌱 BisaPilah — Gerakan Zero Waste
+# BisaPilah - Gerakan Zero Waste
 
-![BisaPilah Hero](./public/Herofordoc.png)
+![BisaPilah Hero](./public/DocsHero.png)
 
-**BisaPilah** adalah website edukasi interaktif bertema **Gerakan Zero Waste** yang dirancang untuk meningkatkan kesadaran masyarakat tentang pentingnya pemilahan sampah. Dibuat untuk lomba web design, website ini menggabungkan konten edukasi dengan mini-game sortir sampah yang menyenangkan — semuanya berjalan 100% di sisi klien tanpa backend.
+**BisaPilah** adalah website edukasi interaktif bertema **Gerakan Zero Waste** yang dirancang untuk meningkatkan kesadaran masyarakat tentang pentingnya pemilahan sampah. Dibuat untuk lomba web design, website ini menggabungkan konten edukasi dengan mini-game sortir sampah yang menyenangkan, semuanya berjalan 100% di sisi klien tanpa backend.
 
 ---
 
@@ -10,9 +10,9 @@
 
 Website ini memiliki dua tujuan utama:
 
-1. **Edukasi Pemilahan Sampah** — Memberikan informasi tentang jenis-jenis sampah (Organik, Anorganik, B3/Berbahaya, Daur Ulang), cara memilahnya, serta tips gaya hidup Zero Waste yang bisa diterapkan sehari-hari.
+1. **Edukasi Pemilahan Sampah** - Memberikan informasi tentang jenis-jenis sampah (Organik, Anorganik, B3/Berbahaya, Daur Ulang), cara memilahnya, serta tips gaya hidup Zero Waste yang bisa diterapkan sehari-hari.
 
-2. **Game Sortir Sampah** — Mini-game interaktif di mana item sampah muncul satu per satu dan pengguna harus memasukkannya ke tong sampah yang sesuai kategorinya. Tersedia feedback langsung (animasi + skor) untuk pengalaman belajar yang menyenangkan.
+2. **Game Sortir Sampah** - Mini-game interaktif di mana item sampah muncul satu per satu dan pengguna harus memasukkannya ke tong sampah yang sesuai kategorinya. Tersedia feedback langsung (animasi + skor) untuk pengalaman belajar yang menyenangkan.
 
 ---
 
@@ -138,14 +138,14 @@ Output statis akan digenerate di folder `.next/` (atau `out/` jika dikonfigurasi
 1. Scroll ke bagian **Game** di halaman utama.
 2. Item sampah akan muncul satu per satu di layar.
 3. **Drag** item ke tong sampah yang sesuai, atau **klik** item lalu **klik tong** tujuan (mendukung mobile & keyboard).
-4. Dapatkan poin untuk setiap jawaban benar — skor ditampilkan real-time.
+4. Dapatkan poin untuk setiap jawaban benar, skor ditampilkan real-time.
 5. Skor akan reset saat halaman di-reload (tidak ada persistensi, sesuai aturan lomba).
 
 ---
 
 ## 📝 Catatan Pengembangan
 
-- Semua data sampah terdefinisi di satu tempat: `src/data/wasteTypes.ts` — jangan duplikat di tempat lain.
-- Tidak ada backend, API route, atau database — 100% frontend statis.
+- Semua data sampah terdefinisi di satu tempat: `src/data/wasteTypes.ts`.
+- Tidak ada backend, API route, atau database, 100% frontend statis.
 - Gunakan `"use client"` di bagian atas file komponen yang menggunakan hooks, animasi, atau event handler.
 - Animasi anime.js selalu dibungkus dalam `useEffect` dengan cleanup untuk mencegah memory leak.
