@@ -78,7 +78,6 @@ export default function TrashBin({
                     draggable={false}
                 />
             </div>
-            {/* Shadow Assets */}
             <img
                 src="/images/section/games/bin/bin-shadow.svg"
                 alt="Shadow"

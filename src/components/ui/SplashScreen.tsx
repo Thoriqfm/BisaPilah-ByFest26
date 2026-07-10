@@ -60,8 +60,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
         const trashEls = trashRefs.current.filter(Boolean) as HTMLDivElement[];
         if (trashEls.length === 0) return;
 
-        // Initial state
-        // All elements start invisible
         animate(bin, { opacity: [0, 0], scale: [0, 0], duration: 0 });
         trashEls.forEach((el) => {
             animate(el, { opacity: [0, 0], scale: [0, 0], duration: 0 });
@@ -70,7 +68,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
 
         const tl = createTimeline({ defaults: { ease: "outElastic(1, 0.6)" } });
 
-        // Bin body pops in
         tl.add(
             bin,
             {
@@ -81,7 +78,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             300,
         );
 
-        // Trash items pop in with stagger
         tl.add(
             trashEls,
             {
@@ -93,7 +89,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             900,
         );
 
-        // Lid lifts up
         tl.add(
             lid,
             {
@@ -104,8 +99,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             1800,
         );
 
-        // Trash items fly into bin
-        // Get bin center after render
         trashEls.forEach((el, i) => {
             tl.add(
                 el,
@@ -116,15 +109,13 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                         const binRect = bin.getBoundingClientRect();
                         const elRect = el.getBoundingClientRect();
 
-                        // Target point: top/mouth of the trash bin
                         const targetX = binRect.left + binRect.width / 2;
                         const targetY = binRect.top + binRect.height * 0.25;
 
                         const dx = targetX - (elRect.left + elRect.width / 2);
                         const dy = targetY - (elRect.top + elRect.height / 2);
-                        const dropDy = dy + (binRect.height * 0.4); // Fall into the bin
+                        const dropDy = dy + (binRect.height * 0.4); 
 
-                        // Peak of the arc
                         const arcPeakY = Math.min(0, dy) - 120;
 
                         animate(el, {
@@ -145,14 +136,14 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                                 },
                                 {
                                     translateX: dx,
-                                    translateY: dy - 40, // Just above the mouth of the bin
+                                    translateY: dy - 40,
                                     scale: 0.5,
                                     rotate: i % 2 === 0 ? 240 : -240,
                                     opacity: 1,
                                 },
                                 {
                                     translateX: dx,
-                                    translateY: dropDy, // Inside the bin
+                                    translateY: dropDy,
                                     scale: 0.1,
                                     rotate: i % 2 === 0 ? 360 : -360,
                                     opacity: 0,
@@ -169,7 +160,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
 
         const afterTrash = 2100 + trashEls.length * 200 + 500;
 
-        // Lid closes
         tl.add(
             lid,
             {
@@ -180,7 +170,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             afterTrash,
         );
 
-        // Bin shakes (bottle-shake: rotate around base)
         const afterShake = afterTrash + 500 + 100;
         tl.add(
             bin,
@@ -192,7 +181,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             afterShake,
         );
 
-        // Green overlay wipes up to cover page
         const afterShakeDone = afterShake + 900 + 100;
         tl.add(
             container,
@@ -219,7 +207,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             style={{ backgroundColor: "#65B354" }}
             aria-hidden="true"
         >
-            {/* Trash items */}
             {TRASH_ITEMS.map((item, i) => (
                 <div
                     key={item.id}
@@ -243,7 +230,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                 </div>
             ))}
 
-            {/* Trash bin */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <div
                     ref={binRef}
@@ -252,11 +238,9 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                         transformOrigin: "bottom center",
                     }}
                 >
-                    {/* Ground shadow */}
                     <div
                         className="absolute left-1/2 bottom-[2%] -translate-x-1/2 w-[80%] h-[6%] rounded-full bg-black/20 blur-[4px] md:blur-md"
                     />
-                    {/* Lid - separate image */}
                     <Image
                         ref={lidRef}
                         src="/images/splash/tutup-tong.svg"
@@ -268,7 +252,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                         draggable={false}
                         priority
                     />
-                    {/* Body */}
                     <Image
                         src="/images/splash/body-tong.svg"
                         alt="Trash Bin Body"
@@ -280,7 +263,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                     />
                 </div>
             </div>
-            {/* Wipe overlay */}
             <div
                 ref={overlayRef}
                 className="absolute inset-0 z-40"

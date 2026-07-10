@@ -34,9 +34,7 @@ export default function Home() {
 
     return (
         <>
-            {/* {!splashDone && ( */}
             <SplashScreen onComplete={() => setSplashDone(true)} />
-            {/* )} */}
 
             <main>
                 <HeroSection isSplashDone={splashDone} />
@@ -44,13 +42,11 @@ export default function Home() {
 
                 {hasGameFinishedOnce && (
                     <div className="relative animate-fade-in transition-opacity duration-1000 flex flex-col -mt-1">
-                        {/* Thin Transition Gradient from GameSection to ChoiceSection */}
                         <div className="w-full h-12 md:h-16 bg-gradient-to-b from-[#EBF4F9] to-[#071120]"></div>
                         <ChoiceSection onPillSelect={handlePillSelect} />
                     </div>
                 )}
 
-                {/* Render Selected Pill Section Below */}
                 {selectedPill === "aksi" && (
                     <div className="animate-fade-in-up">
                         <AksiSection

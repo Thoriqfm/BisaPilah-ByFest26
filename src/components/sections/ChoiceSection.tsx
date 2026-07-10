@@ -45,7 +45,6 @@ export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
       id="choice-section"
       className="relative w-full h-[100dvh] bg-[#071120] flex flex-col md:items-center justify-center overflow-hidden select-none"
     >
-      {/* ── 1. TITLE (Dikeluarkan dari kanvas agar di HP posisinya selalu di atas) ── */}
       <div className="absolute top-[25%] md:top-[8%] w-full flex justify-center items-center z-10 pointer-events-none">
         <h2
           className="font-black tracking-wide drop-shadow-lg text-center leading-none"
@@ -59,11 +58,8 @@ export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
         </h2>
       </div>
 
-      {/* ── KANVAS UTAMA (Tetap mengunci rasio 16:9 di semua device) ── */}
       <div className="relative w-full aspect-[16/9] max-h-screen max-w-[calc(100vh*16/9)] flex items-center justify-center mx-auto">
-        {/* ── 2. GHOST MEN (Kiri & Kanan) ── */}
         <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-10">
-          {/* Ghost Kiri */}
           <div
             className="absolute opacity-[0.35] brightness-[0.8]"
             style={{
@@ -84,7 +80,6 @@ export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
               }}
             />
           </div>
-          {/* Ghost Kanan */}
           <div
             className="absolute opacity-[0.35] brightness-[0.8]"
             style={{
@@ -107,7 +102,6 @@ export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
           </div>
         </div>
 
-        {/* ── 3. CENTER MAN ── */}
         <div
           className="absolute left-1/2 -translate-x-1/2 z-20 pointer-events-none flex justify-center"
           style={{
@@ -128,7 +122,6 @@ export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
           />
         </div>
 
-        {/* ── 4. LABEL AKSI & FACT ── */}
         <h3
           className="absolute font-black text-[#00A3FF] tracking-wide drop-shadow-[0_0_20px_rgba(0,163,255,0.55)] z-40 pointer-events-none"
           style={{
@@ -152,7 +145,6 @@ export default function ChoiceSection({ onPillSelect }: ChoiceSectionProps) {
           Fakta
         </h3>
 
-        {/* ── 5. HANDS ── */}
         <img
           ref={leftHandRef}
           src={tanganBiruKiri}
