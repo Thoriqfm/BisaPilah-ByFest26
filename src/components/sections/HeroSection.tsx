@@ -26,6 +26,7 @@ export default function HeroSection({
     };
 
     const animated = useRef(false);
+    const loopAnim = useRef<any>(null);
 
     useEffect(() => {
         if (isSplashDone && !animated.current) {
@@ -37,7 +38,7 @@ export default function HeroSection({
                     duration: 2000,
                 },
                 onComplete: () => {
-                    animate([".awan-kiri", ".awan-kanan"], {
+                    loopAnim.current = animate([".awan-kiri", ".awan-kanan"], {
                         translateY: () => (Math.random() > 0.5 ? "15px" : "-15px"),
                         alternate: true,
                         loop: true,
@@ -66,8 +67,9 @@ export default function HeroSection({
 
             return () => {
                 tl.pause();
-                animate.remove(".awan-kiri");
-                animate.remove(".awan-kanan");
+                if (loopAnim.current) {
+                    loopAnim.current.pause();
+                }
             };
         }
     }, [isSplashDone]);
