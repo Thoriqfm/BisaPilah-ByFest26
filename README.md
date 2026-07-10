@@ -1,4 +1,4 @@
-# BisaPilah — Gerakan Zero Waste
+# BisaPilah - Gerakan Zero Waste
 
 ![BisaPilah Hero](./public/DocsHero.png)
 
@@ -10,9 +10,9 @@
 
 Website ini memiliki dua tujuan utama:
 
-1. **Edukasi Pemilahan Sampah** — Memberikan informasi tentang jenis-jenis sampah (Organik, Anorganik, B3/Berbahaya, Daur Ulang), cara memilahnya, serta tips gaya hidup Zero Waste yang bisa diterapkan sehari-hari.
+1. **Edukasi Pemilahan Sampah** - Memberikan informasi tentang jenis-jenis sampah (Organik, Anorganik, B3/Berbahaya, Daur Ulang), cara memilahnya, serta tips gaya hidup Zero Waste yang bisa diterapkan sehari-hari.
 
-2. **Game Sortir Sampah** — Mini-game interaktif di mana item sampah muncul satu per satu dan pengguna harus memasukkannya ke tong sampah yang sesuai kategorinya. Tersedia feedback langsung (animasi + skor) untuk pengalaman belajar yang menyenangkan.
+2. **Game Sortir Sampah** - Mini-game interaktif di mana item sampah muncul satu per satu dan pengguna harus memasukkannya ke tong sampah yang sesuai kategorinya. Tersedia feedback langsung (animasi + skor) untuk pengalaman belajar yang menyenangkan.
 
 ---
 
