@@ -1,5 +1,7 @@
 # 🌱 BisaPilah — Gerakan Zero Waste
 
+![BisaPilah Hero](./public/Herofordoc.png)
+
 **BisaPilah** adalah website edukasi interaktif bertema **Gerakan Zero Waste** yang dirancang untuk meningkatkan kesadaran masyarakat tentang pentingnya pemilahan sampah. Dibuat untuk lomba web design, website ini menggabungkan konten edukasi dengan mini-game sortir sampah yang menyenangkan — semuanya berjalan 100% di sisi klien tanpa backend.
 
 ---
@@ -44,21 +46,21 @@ sdgs-creativeweb/
     │   └── choicetest/       # Halaman pengujian komponen (development only)
     │
     ├── components/
-    │   ├── sections/         # Komponen section-level untuk halaman utama
+    │   ├── sections/              # Komponen section-level untuk halaman utama
     │   │   ├── HeroSection.tsx    # Hero banner dengan CTA dan animasi
     │   │   ├── GameSection.tsx    # Wrapper section mini-game sortir sampah
     │   │   ├── FactSection.tsx    # Section fakta & informasi seputar sampah
     │   │   ├── AksiSection.tsx    # Section ajakan aksi Zero Waste
     │   │   └── ChoiceSection.tsx  # Section pilihan kategori sampah
     │   │
-    │   └── ui/               # Komponen UI reusable
+    │   └── ui/                    # Komponen UI reusable
     │       ├── SplashScreen.tsx   # Animasi splash screen saat pertama load
     │       ├── TrashBin.tsx       # Komponen tong sampah (target drop di game)
     │       ├── TrashItem.tsx      # Komponen item sampah (draggable/clickable di game)
     │       └── CardModal.tsx      # Modal card untuk konten edukasi detail
     │
     ├── data/
-    │   └── wasteTypes.ts     # ⭐ Sumber data utama: daftar sampah, kategori, ikon, deskripsi
+    │   └── wasteTypes.ts     # Sumber data utama: daftar sampah, kategori, ikon, deskripsi
     │
     ├── hooks/
     │   ├── useGameLogic.ts   # Hook logika game (skor, state item aktif, feedback benar/salah)
