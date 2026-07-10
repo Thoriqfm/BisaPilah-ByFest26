@@ -216,7 +216,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                         ref={(el) => {
                             trashRefs.current[i] = el;
                         }}
-                        className="w-[60px] h-[60px] sm:w-[75px] sm:h-[75px] md:w-[90px] md:h-[90px]"
+                        className="relative w-[60px] h-[60px] sm:w-[75px] sm:h-[75px] md:w-[90px] md:h-[90px]"
                     >
                         <Image
                             src={item.src}
@@ -247,8 +247,8 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                         alt="Trash Bin Lid"
                         width={180}
                         height={98}
-                        className="absolute left-0 w-full h-auto object-contain z-10"
-                        style={{ top: "17%", marginLeft: "1%" }}
+                        className="absolute left-0 z-10"
+                        style={{ top: "17%", marginLeft: "1%", width: "100%", height: "auto" }}
                         draggable={false}
                         priority
                     />
@@ -257,7 +257,8 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                         alt="Trash Bin Body"
                         width={180}
                         height={251}
-                        className="absolute left-0 bottom-0 w-full h-auto object-contain z-0"
+                        className="absolute left-0 bottom-0 z-0"
+                        style={{ width: "100%", height: "auto" }}
                         draggable={false}
                         priority
                     />
