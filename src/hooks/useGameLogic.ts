@@ -15,6 +15,8 @@ interface UseGameLogicReturn {
     advanceToNextItem: () => void;
 }
 
+const ITEMS_PER_GAME = 5;
+
 export function useGameLogic(): UseGameLogicReturn {
     const [score, setScore] = useState(0);
     const [mistakes, setMistakes] = useState(0);
@@ -35,7 +37,7 @@ export function useGameLogic(): UseGameLogicReturn {
         setScore(0);
         setMistakes(0);
         setCurrentIndex(0);
-        setItems(shuffleArray(wasteItems));
+        setItems(shuffleArray(wasteItems).slice(0, ITEMS_PER_GAME));
         setBinStates({
             ORGANIK: 'default',
             ANORGANIK: 'default',
