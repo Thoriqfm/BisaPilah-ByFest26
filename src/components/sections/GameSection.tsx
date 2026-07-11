@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { animate } from "animejs";
+import { animate, utils } from "animejs";
 import { useGameLogic } from "../../hooks/useGameLogic";
 import { useDrag } from "../../hooks/useDrag";
 import TrashBin from "../ui/TrashBin";
@@ -12,6 +12,8 @@ import { isColliding } from "../../lib/gameUtils";
 interface GameSectionProps {
   onFinish?: (finished: boolean) => void;
 }
+
+const CATEGORIES: WasteCategory[] = ["ORGANIK", "ANORGANIK", "B3"];
 
 export default function GameSection({ onFinish }: GameSectionProps) {
   const {
@@ -26,23 +28,21 @@ export default function GameSection({ onFinish }: GameSectionProps) {
     advanceToNextItem,
   } = useGameLogic();
 
-  const [showPopup, setShowPopup] = useState(false);
   const [headerFeedback, setHeaderFeedback] = useState<
     "default" | "success" | "error"
   >("default");
   const headerRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    if (isFinished) {
-      setShowPopup(true);
-    } else {
-      setShowPopup(false);
-    }
-
-    if (onFinish) {
-      onFinish(isFinished);
-    }
+    onFinish?.(isFinished);
   }, [isFinished, onFinish]);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    return () => {
+      if (header) utils.remove(header);
+    };
+  }, []);
 
   const [shakingBin, setShakingBin] = useState<{
     category: WasteCategory;
@@ -61,14 +61,12 @@ export default function GameSection({ onFinish }: GameSectionProps) {
         }
       });
 
-      // Update hover states
-      (["ORGANIK", "ANORGANIK", "B3"] as WasteCategory[]).forEach((cat) => {
+      CATEGORIES.forEach((cat) => {
         setBinHoverState(cat, cat === hoveredCategory);
       });
     },
     onDrop: (targetBin) => {
-      // Reset all hover states
-      (["ORGANIK", "ANORGANIK", "B3"] as WasteCategory[]).forEach((cat) => {
+      CATEGORIES.forEach((cat) => {
         setBinHoverState(cat, false);
       });
 
@@ -81,7 +79,6 @@ export default function GameSection({ onFinish }: GameSectionProps) {
         "data-category",
       ) as WasteCategory;
 
-      // If bin is unavailable, don't allow drop
       if (binStates[targetCategory] === "unavailable") {
         resetPosition(true);
         return;
@@ -127,7 +124,6 @@ export default function GameSection({ onFinish }: GameSectionProps) {
       id="game-section"
       className="relative h-[100dvh] w-full bg-[#EBF4F9] flex flex-col items-center pt-[5vh] sm:pt-[8vh] select-none overflow-x-clip"
     >
-      {/* Transition Blur */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none translate-y-[-50%]"
         style={{
@@ -140,7 +136,6 @@ export default function GameSection({ onFinish }: GameSectionProps) {
         }}
       />
 
-      {/* Header / Title */}
       <div className="text-center z-10 px-4 mb-[2vh] sm:mb-[4vh]">
         <h2
           ref={headerRef}
@@ -181,18 +176,15 @@ export default function GameSection({ onFinish }: GameSectionProps) {
         </div>
       </div>
 
-      {/* Game Area */}
       <div className="relative w-full max-w-4xl flex-1 flex flex-col items-center justify-between z-10 min-h-0">
-        {/* Active Trash Item */}
         <div className="flex-1 w-full flex items-center justify-center pb-[10vh] min-h-0">
           {currentItem && !isFinished ? (
             <TrashItem key={currentItem.id} ref={itemRef} item={currentItem} />
           ) : null}
         </div>
 
-        {/* Trash Bins Container */}
         <div className="w-full flex justify-center items-end gap-6 sm:gap-12 md:gap-16 lg:gap-24 px-4 pb-[5vh] md:pb-[8vh]">
-          {(["ORGANIK", "ANORGANIK", "B3"] as WasteCategory[]).map((cat) => (
+          {CATEGORIES.map((cat) => (
             <TrashBin
               key={cat}
               category={cat}
@@ -209,7 +201,6 @@ export default function GameSection({ onFinish }: GameSectionProps) {
         </div>
       </div>
 
-      {/* Floating Stones */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
         <div className="absolute top-[45%] sm:top-[50%] left-[25%] sm:left-[30%]">
           <img
@@ -227,7 +218,6 @@ export default function GameSection({ onFinish }: GameSectionProps) {
         </div>
       </div>
 
-      {/* Background & Footer Graphics */}
       <div className="absolute bottom-0 left-0 w-full z-0 pointer-events-none">
         <img
           src="/images/section/games/pic/games-footer.svg"
@@ -236,13 +226,10 @@ export default function GameSection({ onFinish }: GameSectionProps) {
         />
       </div>
 
-      {/* Popup Modal */}
-      {isFinished && showPopup && (
+      {isFinished && (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-transparent px-4 animate-fade-in">
           <div className="relative bg-[#EBF9EE] border-[6px] border-[#2E7D32] rounded-[3rem] p-6 md:p-10 min-h-[350px] md:min-h-[450px] max-w-3xl w-full text-center flex flex-col items-center justify-center animate-fade-in-up mt-36 shadow-2xl">
-            {/* Text and Image Wrapper */}
             <div className="mt-24 md:mt-36 w-full relative flex flex-col items-center z-10">
-              {/* Farmer Woman Image (Anchored perfectly to the text) */}
               <div className="absolute -top-[130px] md:-top-[190px] left-1/2 -translate-x-1/2 w-[240px] md:w-[360px] h-auto z-0 pointer-events-none">
                 <img
                   src="/images/section/games/popup/farmer-woman.png"
@@ -273,7 +260,6 @@ export default function GameSection({ onFinish }: GameSectionProps) {
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center w-full max-w-2xl mx-auto">
                 <button
                   onClick={() => {
-                    setShowPopup(false);
                     resetGame();
                     setHeaderFeedback("default");
                   }}

@@ -84,8 +84,8 @@ Pastikan sudah menginstall [Node.js](https://nodejs.org/) (versi 18 atau lebih b
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/username/sdgs-creativeweb.git
-cd sdgs-creativeweb
+git clone https://github.com/Thoriqfm/BisaPilah-ByFest26.git
+cd BisaPilah-ByFest26
 ```
 
 ### 2. Install Dependencies

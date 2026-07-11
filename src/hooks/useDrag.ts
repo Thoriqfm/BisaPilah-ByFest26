@@ -22,9 +22,6 @@ export function useDrag({ onDrop, onDragMove, enabled = true }: UseDragProps) {
             if (!enabled) return;
             isDragging.current = true;
             
-            // Get initial position relative to the viewport or offset parent
-            // Since we use anime.js translateX/Y, the initial transform is 0,0
-            // But we need to calculate movement deltas.
             initialPos.current = {
                 x: e.clientX - currentPos.current.x,
                 y: e.clientY - currentPos.current.y
@@ -32,9 +29,8 @@ export function useDrag({ onDrop, onDragMove, enabled = true }: UseDragProps) {
             
             element.setPointerCapture(e.pointerId);
             element.style.cursor = 'grabbing';
-            element.style.zIndex = '50'; // Bring to front
+            element.style.zIndex = '50';
             
-            // Minor scale up on drag start
             animate(element, {
                 scale: 1.1,
                 duration: 200,
@@ -45,13 +41,11 @@ export function useDrag({ onDrop, onDragMove, enabled = true }: UseDragProps) {
         const handlePointerMove = (e: PointerEvent) => {
             if (!isDragging.current) return;
             
-            // Calculate new position
             const newX = e.clientX - initialPos.current.x;
             const newY = e.clientY - initialPos.current.y;
             
             currentPos.current = { x: newX, y: newY };
 
-            // Direct DOM manipulation via anime.js for performance (no React state)
             utils.set(element, {
                 translateX: newX,
                 translateY: newY,
@@ -70,14 +64,12 @@ export function useDrag({ onDrop, onDragMove, enabled = true }: UseDragProps) {
             element.style.cursor = 'grab';
             element.style.zIndex = '10';
 
-            // Scale back to normal
             animate(element, {
                 scale: 1,
                 duration: 200,
                 ease: 'outQuad'
             });
 
-            // Find all bins on screen
             const binElements = document.querySelectorAll('.trash-bin-target');
             let droppedBin: HTMLElement | null = null;
             
@@ -114,7 +106,7 @@ export function useDrag({ onDrop, onDragMove, enabled = true }: UseDragProps) {
                 translateX: 0,
                 translateY: 0,
                 duration: 400,
-                ease: 'outElastic(1, .5)' // Bouncy return
+                ease: 'outElastic(1, .5)'
             });
         } else {
             utils.set(element, { translateX: 0, translateY: 0 });
@@ -125,7 +117,6 @@ export function useDrag({ onDrop, onDragMove, enabled = true }: UseDragProps) {
         const element = itemRef.current;
         if (!element) return;
 
-        // Calculate center of bin relative to the current position
         const binRect = binElement.getBoundingClientRect();
         const elementRect = element.getBoundingClientRect();
         

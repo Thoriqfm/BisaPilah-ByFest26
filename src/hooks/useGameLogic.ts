@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { wasteItems, WasteItem, WasteCategory, trashBins, TrashBinData } from '../data/wasteTypes';
+import { wasteItems, WasteItem, WasteCategory } from '../data/wasteTypes';
 import { shuffleArray } from '../lib/gameUtils';
 
 interface UseGameLogicReturn {
@@ -28,7 +28,6 @@ export function useGameLogic(): UseGameLogicReturn {
         B3: 'default',
     });
 
-    // Initialize game
     useEffect(() => {
         resetGame();
     }, []);
@@ -51,7 +50,6 @@ export function useGameLogic(): UseGameLogicReturn {
 
     const setBinHoverState = useCallback((category: WasteCategory, isHovered: boolean) => {
         setBinStates((prev) => {
-            // Don't change state if it's already unavailable
             if (prev[category] === 'unavailable') return prev;
             
             return {
@@ -62,23 +60,19 @@ export function useGameLogic(): UseGameLogicReturn {
     }, []);
 
     const handleDrop = useCallback((itemCategory: WasteCategory, targetCategory: WasteCategory) => {
-        // Correct drop
         if (itemCategory === targetCategory) {
             setScore((prev) => prev + 1);
-            // We DO NOT increment index here. It will be incremented by advanceToNextItem after animation completes.
-            setMistakes(0); // Reset mistakes on correct answer
+            setMistakes(0);
             setBinStates({
                 ORGANIK: 'default',
                 ANORGANIK: 'default',
                 B3: 'default',
             });
-            return true; // Success
+            return true;
         } else {
-            // Wrong drop
             setMistakes((prev) => {
                 const newMistakes = prev + 1;
                 if (newMistakes >= 3 && currentItem) {
-                    // Disable wrong bins as a clue
                     setBinStates((prevStates) => {
                         const newStates = { ...prevStates };
                         (Object.keys(newStates) as WasteCategory[]).forEach((key) => {
@@ -93,7 +87,7 @@ export function useGameLogic(): UseGameLogicReturn {
                 }
                 return newMistakes;
             });
-            return false; // Failed
+            return false;
         }
     }, [currentItem]);
 
