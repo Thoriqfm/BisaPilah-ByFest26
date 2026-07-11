@@ -110,6 +110,18 @@ export default function GameSection({ onFinish }: GameSectionProps) {
     },
   });
 
+  // Entrance animation for new items
+  useEffect(() => {
+    if (itemRef.current && currentItem && !isFinished) {
+      animate(itemRef.current, {
+        scale: [0, 1],
+        opacity: [0, 1],
+        duration: 500,
+        ease: "outElastic(1, .5)",
+      });
+    }
+  }, [currentItem, isFinished]);
+
   return (
     <section
       id="game-section"
@@ -174,7 +186,7 @@ export default function GameSection({ onFinish }: GameSectionProps) {
         {/* Active Trash Item */}
         <div className="flex-1 w-full flex items-center justify-center pb-[10vh] min-h-0">
           {currentItem && !isFinished ? (
-            <TrashItem ref={itemRef} item={currentItem} />
+            <TrashItem key={currentItem.id} ref={itemRef} item={currentItem} />
           ) : null}
         </div>
 
