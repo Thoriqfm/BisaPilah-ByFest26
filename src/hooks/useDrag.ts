@@ -131,8 +131,9 @@ export function useDrag({ onDrop, onDragMove, enabled = true }: UseDragProps) {
             duration: 300,
             ease: 'inQuad',
             onComplete: () => {
-                resetPosition(false);
-                utils.set(element, { scale: 1, opacity: 1 });
+                resetPosition(false); // Reset silently after drop animation
+                // We do NOT reset scale and opacity here.
+                // The element will be unmounted and replaced by a new one by React.
                 if (onComplete) onComplete();
             }
         });
